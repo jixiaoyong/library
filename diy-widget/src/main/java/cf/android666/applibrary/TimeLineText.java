@@ -38,11 +38,11 @@ public class TimeLineText extends TextView {
         init();
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    public TimeLineText(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
-        init();
-    }
+//    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+//    public TimeLineText(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+//        super(context, attrs, defStyleAttr, defStyleRes);
+//        init();
+//    }
 
     private void init() {
         linePaint = new Paint();
@@ -84,7 +84,8 @@ public class TimeLineText extends TextView {
         Log.d("tag", "getLeft = " + getLeft());
 
         //获取到的view坐标都是相对于父容器
-        //canvas.drawxxx()都是相对于子容器的(0,0)
+        //canvas.drawxxx()
+
 
     }
 
