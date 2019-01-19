@@ -4,12 +4,10 @@ import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.media.session.PlaybackStateCompat;
-import android.view.View;
-import android.widget.CompoundButton;
-import android.widget.Toast;
+import android.util.Log;
 import android.widget.ToggleButton;
 
+import cf.android666.applibrary.Logger;
 import cf.android666.applibrary.ProgressButton;
 
 /**
@@ -39,6 +37,7 @@ public class MainActivity extends Activity {
         });
         animator.start();
 
+        Log.d((Logger.generateTag()), "" + Logger.isLog());
 
     }
 }
