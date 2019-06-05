@@ -22,18 +22,21 @@ object Logger {
         return "${stack.className}.${stack.methodName}(Line:${stack.lineNumber})"
     }
 
+    @JvmStatic
     fun d(any: Any) {
         if (isLog) {
             Log.d(generateTag(), any.toString())
         }
     }
 
+    @JvmStatic
     fun e(any: Any) {
         if (isLog) {
             Log.e(generateTag(), any.toString())
         }
     }
 
+    @JvmStatic
     fun i(any: Any) {
         if (isLog) {
             Log.i(generateTag(), any.toString())

@@ -55,39 +55,6 @@ public class ToggleButtonPlus extends ToggleButton {
 
 
     @Override
-    protected void onDraw(Canvas canvas) {
-
-        int circleR = mHeight / 2;
-
-        Paint backgroundPaint = new Paint();
-        RectF rectF = new RectF(0, 0, mWidth, mHeight);
-
-        Paint forwardPaint = new Paint();
-        forwardPaint.setColor(mForwardColor);
-
-        if (isChecked) {
-            backgroundPaint.setColor(mBackgroundColor);
-        } else {
-            backgroundPaint.setColor(mForwardColor);
-        }
-
-        canvas.drawRoundRect(rectF, circleR, circleR, backgroundPaint);
-        canvas.drawCircle(cx, cy, circleR, forwardPaint);
-
-        forwardPaint.setStyle(Paint.Style.STROKE);
-        forwardPaint.setColor(mStrokeColor);
-        forwardPaint.setStrokeWidth(3);
-        canvas.drawCircle(cx, cy, circleR, forwardPaint);
-
-        backgroundPaint.setStyle(Paint.Style.STROKE);
-        backgroundPaint.setColor(mStrokeColor);
-        backgroundPaint.setStrokeWidth(3);
-        canvas.drawRoundRect(rectF, circleR, circleR, backgroundPaint);
-
-
-    }
-
-    @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
 
         int widthMode = MeasureSpec.getMode(widthMeasureSpec);
@@ -121,6 +88,43 @@ public class ToggleButtonPlus extends ToggleButton {
 
         cx = mHeight / 2;
         cy = mHeight / 2;
+    }
+
+    @Override
+    protected void onDraw(Canvas canvas) {
+
+        int circleR = mHeight / 2;
+
+        Paint backgroundPaint = new Paint();
+
+        Paint forwardPaint = new Paint();
+        forwardPaint.setColor(mForwardColor);
+
+        RectF backgroundRectF = new RectF(0, 0, cx + circleR, mHeight);
+        backgroundPaint.setColor(mBackgroundColor);
+        backgroundPaint.setAlpha((int) (255 * (cx / mWidth)));
+
+        //背景
+        canvas.drawRoundRect(backgroundRectF, circleR, circleR, backgroundPaint);
+
+        //小球
+        canvas.drawCircle(cx, cy, circleR, forwardPaint);
+
+        //小球边框
+        forwardPaint.setStyle(Paint.Style.STROKE);
+        forwardPaint.setColor(mStrokeColor);
+        forwardPaint.setAlpha((int) (255 * (1 - cx / mWidth)));
+        forwardPaint.setStrokeWidth(2);
+        canvas.drawCircle(cx, cy, circleR, forwardPaint);
+
+        //背景边框
+        RectF rectF = new RectF(0, 0, mWidth, mHeight);
+        backgroundPaint.setStyle(Paint.Style.STROKE);
+        backgroundPaint.setColor(mStrokeColor);
+        backgroundPaint.setAlpha((int) (255 * (1 - cx / mWidth)));
+        backgroundPaint.setStrokeWidth(2);
+        canvas.drawRoundRect(rectF, circleR, circleR, backgroundPaint);
+
     }
 
     @Override
