@@ -1,0 +1,10 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="dialogButtonStyle">
+        <!-- Customize your theme here. -->
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:color">@android:color/holo_blue_light</item>
+    </style>
+
+</resources>

@@ -2,12 +2,14 @@ package cf.android666.diywidget
 
 import android.animation.ValueAnimator
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.ToggleButton
 
 import cf.android666.applibrary.Logger
 import cf.android666.applibrary.ProgressButton
+import cf.android666.diywidget.scalelist.ScaleHorizontalActivity
 import cf.android666.diywidget.view.RoundDialogView
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -37,6 +39,9 @@ class MainActivity : Activity() {
         click_btn.setOnClickListener {
             RoundDialogView(this).show()
         }
+//        go_scale_activity.setOnClickListener {
+        startActivity(Intent(this@MainActivity, ScaleHorizontalActivity::class.java))
+//        }
 
     }
 }

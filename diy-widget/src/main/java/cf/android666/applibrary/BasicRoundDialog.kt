@@ -42,8 +42,8 @@ abstract class BasicRoundDialog @JvmOverloads constructor(mContext: Context,
         mD?.getSize(point)
 
         //屏幕大小固定，不用考虑适配其他屏幕
-        lp?.width = if (point.x != 0) (point.x * 0.6).toInt() else 1200
-        lp?.height = if (point.y != 0) (point.y * 0.75).toInt() else 900
+        lp?.width = if (point.x != 0) (point.x * 0.6).toInt() else DpPxUtils.dip2px(context, 800)
+//        lp?.height = if (point.y != 0) (point.y * 0.75).toInt() else 900
         window?.attributes = lp
         window?.setBackgroundDrawableResource(android.R.color.transparent)
     }
