@@ -55,9 +55,7 @@ abstract class DiyDividerItemDecoration(private val context: Context)
                 val bottom = top + decorationWidth
                 paint.color = Color.LTGRAY
                 c.drawRect(Rect(left + 50, top, right - 50, bottom), paint)
-                paint.color = Color.WHITE
-                paint.textSize = DpPxUtils.sp2px(context, 22).toFloat()
-                c.drawText(getTitle(position), ((right + left) / 2).toFloat(), ((bottom + top) / 2).toFloat(), paint)
+                drawText(paint, c, getTitle(position), right, left)
             }
 
         }
@@ -85,14 +83,22 @@ abstract class DiyDividerItemDecoration(private val context: Context)
         paint.isAntiAlias = true
         paint.color = Color.LTGRAY
         c.drawRect(Rect(left, 0, right, decorationWidth), paint)
-        paint.color = Color.WHITE
-        paint.textSize = DpPxUtils.sp2px(context, 22).toFloat()
 
         val position = parent.getChildLayoutPosition(parent.getChildAt(0))
         val currentTitle = getTitle(position)
-        c.drawText(currentTitle, ((right + left) / 2).toFloat(), (decorationWidth / 2).toFloat(), paint)
+
+        drawText(paint, c, currentTitle, right, left)
         lastTitle = currentTitle
 
+    }
+
+    private fun drawText(paint: Paint, c: Canvas, currentTitle: String, right: Int, left: Int) {
+        paint.color = Color.WHITE
+        paint.textSize = DpPxUtils.sp2px(context, 22).toFloat()
+        paint.textAlign = Paint.Align.CENTER
+
+        c.drawText(currentTitle, (right + left) / 2.toFloat(),
+                ((decorationWidth + (paint.fontMetrics.bottom - paint.fontMetrics.top) / 2) / 2), paint)
     }
 
     override fun getItemOffsets(outRect: Rect?, view: View?, parent: RecyclerView?, state: RecyclerView.State?) {
