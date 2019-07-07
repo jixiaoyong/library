@@ -28,15 +28,28 @@
         android:layout_gravity="center" />
 
     <Button
-        android:text="show dialog"
         android:id="@+id/click_btn"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="show dialog" />
 
     <Button
-        android:text="GO_SCALE_ACTIVITY"
         android:id="@+id/go_scale_activity"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="GO_SCALE_ACTIVITY" />
+
+    <cf.android666.applibrary.ColorfulTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello World" />
+
+    <cf.android666.diywidget.view.SineView
+        android:layout_width="200dp"
+        android:layout_height="200dp" />
+
+    <cf.android666.diywidget.view.ColorfulSineView
+        android:layout_width="200dp"
+        android:layout_height="200dp" />
 
 </LinearLayout>
