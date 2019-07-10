@@ -2,7 +2,9 @@ package cf.android666.diywidget
 
 import android.animation.ValueAnimator
 import android.app.Activity
+import android.graphics.Canvas
 import android.os.Bundle
+import android.support.annotation.RequiresApi
 import android.util.Log
 import android.widget.ToggleButton
 import cf.android666.applibrary.Logger
@@ -44,5 +46,11 @@ class MainActivity : Activity() {
         thread {
             Logger.e("warning")
         }
+    }
+
+    @RequiresApi(17)
+    fun api17() {
+        val c = Canvas()
+
     }
 }
