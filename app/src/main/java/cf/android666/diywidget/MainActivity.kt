@@ -1,15 +1,14 @@
 package cf.android666.diywidget
 
-import android.animation.ValueAnimator
 import android.app.Activity
-import android.graphics.Canvas
 import android.os.Bundle
-import android.support.annotation.RequiresApi
-import android.util.Log
+import android.view.View
+import android.view.ViewGroup
+import android.widget.BaseAdapter
+import android.widget.TextView
 import android.widget.ToggleButton
+import cf.android666.applibrary.AutomateLoadingListView
 import cf.android666.applibrary.Logger
-import cf.android666.applibrary.ProgressButton
-import cf.android666.diywidget.view.RoundDialogView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlin.concurrent.thread
 
@@ -20,37 +19,49 @@ import kotlin.concurrent.thread
 class MainActivity : Activity() {
 
     private val toggleButton: ToggleButton? = null
+    private var itemCount = 20
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val progressButton = findViewById<ProgressButton>(R.id.progress)
+        val adapter = object : BaseAdapter() {
+            override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
+                var view = layoutInflater.inflate(android.R.layout.activity_list_item, parent, false)
+                view.findViewById<TextView>(android.R.id.text1).text = "TextView:$position"
+                return view
+            }
 
-        val animator = ValueAnimator.ofFloat(0F, 1F)
-        animator.duration = 10000
-        animator.repeatCount = ValueAnimator.INFINITE
-        animator.repeatMode = ValueAnimator.RESTART
-        animator.addUpdateListener { animation -> progressButton.progress = animation.animatedValue as Float }
-        animator.start()
+            override fun getItem(position: Int) = null
 
-        Log.d(Logger.generateTag(), "" + Logger.isLog)
+            override fun getItemId(position: Int) = position.toLong()
 
-        click_btn.setOnClickListener {
-            RoundDialogView(this).show()
+            override fun getCount() = itemCount
+
         }
-//        go_scale_activity.setOnClickListener {
-//        startActivity(Intent(this@MainActivity, ScaleHorizontalActivity::class.java))
-//        }
+        listView.adapter = adapter
+        listView.loadingListener = object : AutomateLoadingListView.LoadingListener {
+            override fun getFootViewType(): AutomateLoadingListView.FootViewType {
+                Logger.d("itemCount:$itemCount")
+                return if (itemCount < 150) {
+                    AutomateLoadingListView.FootViewType.LOADING
+                } else {
+                    AutomateLoadingListView.FootViewType.NO_MORE
+                }
+            }
 
-        thread {
-            Logger.e("warning")
+            override fun loading() {
+                thread {
+                    Thread.sleep((Math.random() * 3_000 + 3_000).toLong())
+                    runOnUiThread {
+                        itemCount += 10
+                        listView.removeFootView()
+                    }
+                }
+            }
+
         }
+
     }
 
-    @RequiresApi(17)
-    fun api17() {
-        val c = Canvas()
-
-    }
 }
