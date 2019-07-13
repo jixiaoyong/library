@@ -39,13 +39,13 @@ class ScaleHorizontalActivity : Activity() {
 
         recycler.layoutManager = LinearLayoutManager(this, orientation, false)
         recycler.adapter = object : RecyclerView.Adapter<RoundDialogView.VH>() {
-            override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int) = RoundDialogView.VH(
-                    layoutInflater.inflate(R.layout.item_scale_view, parent, false))
+            override fun onCreateViewHolder(p0: ViewGroup, viewType: Int): RoundDialogView.VH = RoundDialogView.VH(
+                    layoutInflater.inflate(R.layout.item_scale_view, p0, false))
 
             override fun getItemCount() = mItemCount
 
-            override fun onBindViewHolder(holder: RoundDialogView.VH?, position: Int) {
-                holder?.itemView?.findViewById<TextView>(R.id.textview)?.text = "Hello $position"
+            override fun onBindViewHolder(p0: RoundDialogView.VH, position: Int) {
+                p0?.itemView?.findViewById<TextView>(R.id.textview)?.text = "Hello $position"
             }
 
         }
@@ -62,7 +62,7 @@ class ScaleHorizontalActivity : Activity() {
 
         })
         recycler.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
                 if (shouldScrollAfterScroll && scrollPositionAfterScroll != -1) {
                     recyclerScrollToPosition(scrollPositionAfterScroll)
@@ -74,12 +74,14 @@ class ScaleHorizontalActivity : Activity() {
 
         listMenu.layoutManager = LinearLayoutManager(this, orientation, false)
         listMenu.adapter = object : RecyclerView.Adapter<RoundDialogView.VH>() {
-            override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int) = RoundDialogView.VH(
-                    layoutInflater.inflate(android.R.layout.simple_list_item_1, parent, false))
+
+
+            override fun onCreateViewHolder(p0: ViewGroup, viewType: Int): RoundDialogView.VH = RoundDialogView.VH(
+                    layoutInflater.inflate(android.R.layout.simple_list_item_1, p0, false))
 
             override fun getItemCount() = hasDecorationMap.size
 
-            override fun onBindViewHolder(holder: RoundDialogView.VH?, position: Int) {
+            override fun onBindViewHolder(holder: RoundDialogView.VH, position: Int) {
                 holder?.itemView?.findViewById<TextView>(android.R.id.text1)?.text =
                         hasDecorationMap[hasDecorationMap.keys.toIntArray()[position]]
                 holder?.itemView?.setOnClickListener {

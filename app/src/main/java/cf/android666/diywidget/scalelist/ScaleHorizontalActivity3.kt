@@ -40,12 +40,12 @@ class ScaleHorizontalActivity3 : Activity() {
 
         recycler.layoutManager = LinearLayoutManager(this, orientation, false)
         recycler.adapter = object : RecyclerView.Adapter<RoundDialogView.VH>() {
-            override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int) = RoundDialogView.VH(
+            override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RoundDialogView.VH = RoundDialogView.VH(
                     layoutInflater.inflate(R.layout.item_scale_view, parent, false))
 
             override fun getItemCount() = mItemCount
 
-            override fun onBindViewHolder(holder: RoundDialogView.VH?, position: Int) {
+            override fun onBindViewHolder(holder: RoundDialogView.VH, position: Int) {
                 holder?.itemView?.findViewById<TextView>(R.id.textview)?.text = "Hello $position"
             }
 
@@ -83,12 +83,12 @@ class ScaleHorizontalActivity3 : Activity() {
 
         listMenu.layoutManager = LinearLayoutManager(this, orientation, false)
         listMenu.adapter = object : RecyclerView.Adapter<RoundDialogView.VH>() {
-            override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int) = RoundDialogView.VH(
+            override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RoundDialogView.VH = RoundDialogView.VH(
                     layoutInflater.inflate(android.R.layout.simple_list_item_1, parent, false))
 
             override fun getItemCount() = hasDecorationMap.size
 
-            override fun onBindViewHolder(holder: RoundDialogView.VH?, position: Int) {
+            override fun onBindViewHolder(holder: RoundDialogView.VH, position: Int) {
                 holder?.itemView?.findViewById<TextView>(android.R.id.text1)?.text =
                         hasDecorationMap[hasDecorationMap.keys.toIntArray()[position]]
                 holder?.itemView?.setOnClickListener {

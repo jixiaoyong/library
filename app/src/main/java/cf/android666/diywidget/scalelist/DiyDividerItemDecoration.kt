@@ -23,7 +23,7 @@ abstract class DiyDividerItemDecoration(private val context: Context)
     private var decorationWidth = 100
     private var lastTitle = ""
 
-    override fun onDraw(c: Canvas?, parent: RecyclerView?, state: RecyclerView.State?) {
+    override fun onDraw(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
         super.onDraw(c, parent, state)
         if (parent == null || c == null) {
             return
@@ -61,7 +61,7 @@ abstract class DiyDividerItemDecoration(private val context: Context)
         }
     }
 
-    override fun onDrawOver(c: Canvas?, parent: RecyclerView?, state: RecyclerView.State?) {
+    override fun onDrawOver(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
         super.onDrawOver(c, parent, state)
         if (parent == null || c == null) {
             return
@@ -101,7 +101,7 @@ abstract class DiyDividerItemDecoration(private val context: Context)
                 ((decorationWidth + (paint.fontMetrics.bottom - paint.fontMetrics.top) / 2) / 2) + top, paint)
     }
 
-    override fun getItemOffsets(outRect: Rect?, view: View?, parent: RecyclerView?, state: RecyclerView.State?) {
+    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
         if (parent != null) {
             val position = parent.getChildAdapterPosition(view)
             if (shouldHaveDecoration(position)) {

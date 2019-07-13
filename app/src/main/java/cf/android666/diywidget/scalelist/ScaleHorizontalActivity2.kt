@@ -36,12 +36,12 @@ class ScaleHorizontalActivity2 : Activity() {
 
         val adapter: RecyclerView.Adapter<RecyclerView.ViewHolder> = object : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-            override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int) = RoundDialogView.VH(
+            override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder = RoundDialogView.VH(
                     layoutInflater.inflate(R.layout.item_scale_view2, parent, false))
 
             override fun getItemCount() = datas.size
 
-            override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
+            override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
                 holder?.itemView?.findViewById<TextView>(R.id.textview)?.text = datas[position]
             }
 

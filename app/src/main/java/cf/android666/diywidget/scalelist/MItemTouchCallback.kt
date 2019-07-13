@@ -15,7 +15,7 @@ class MItemTouchCallback(private val dataList: ArrayList<String>,
                          private val adapter: RecyclerView.Adapter<RecyclerView.ViewHolder>,
                          private val mListener: OnSwipeListener<String>?) : ItemTouchHelper.Callback() {
 
-    override fun getMovementFlags(recyclerView: RecyclerView?, viewHolder: RecyclerView.ViewHolder?): Int {
+    override fun getMovementFlags(recyclerView: RecyclerView, p1: RecyclerView.ViewHolder): Int {
         val dragFlag = 0
         var swipeFlag = 0
         if (recyclerView?.layoutManager is ScaleLinearLayoutManager) {
@@ -24,11 +24,11 @@ class MItemTouchCallback(private val dataList: ArrayList<String>,
         return makeMovementFlags(dragFlag, swipeFlag)
     }
 
-    override fun onMove(recyclerView: RecyclerView?, viewHolder: RecyclerView.ViewHolder?, target: RecyclerView.ViewHolder?): Boolean {
+    override fun onMove(p0: RecyclerView, p1: RecyclerView.ViewHolder, p2: RecyclerView.ViewHolder): Boolean {
         return false
     }
 
-    override fun onSwiped(viewHolder: RecyclerView.ViewHolder?, direction: Int) {
+    override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
         viewHolder?.itemView?.setOnTouchListener(null)
 
         val currentPosition = viewHolder!!.layoutPosition

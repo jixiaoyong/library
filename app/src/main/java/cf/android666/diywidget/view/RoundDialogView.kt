@@ -21,11 +21,11 @@ class RoundDialogView(context: Context) : BasicRoundDialog(context, null, "Choos
         val view = RecyclerView(context)
         view.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         view.adapter = object : RecyclerView.Adapter<VH>() {
-            override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int) = VH(layoutInflater.inflate(android.R.layout.simple_dropdown_item_1line, parent, false))
+            override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH = VH(layoutInflater.inflate(android.R.layout.simple_dropdown_item_1line, parent, false))
 
             override fun getItemCount() = 300
 
-            override fun onBindViewHolder(holder: VH?, position: Int) {
+            override fun onBindViewHolder(holder: VH, position: Int) {
                 holder?.itemView?.findViewById<TextView>(android.R.id.text1)?.text = "Hello $position"
             }
 
