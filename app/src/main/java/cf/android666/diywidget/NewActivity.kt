@@ -2,8 +2,6 @@ package cf.android666.diywidget
 
 import android.app.Activity
 import android.os.Bundle
-import cf.android666.applibrary.Logger
-import cf.android666.applibrary.ThumbnailUtils
 import kotlinx.android.synthetic.main.new_activity.*
 import pub.devrel.easypermissions.AfterPermissionGranted
 import pub.devrel.easypermissions.EasyPermissions
@@ -43,11 +41,11 @@ class NewActivity : Activity() {
     @AfterPermissionGranted(RC_READ_EXTERNAL_STORAGE)
     private fun readImageFromSdcard() {
         thread {
-            val bitmap = ThumbnailUtils.getRoundThumbnailBitmap(imagePath, 50F, imageView.height, imageView.width)
-            Logger.d("scaleBitmap size:${(bitmap?.byteCount ?: 0).toFloat() / (1024 * 1024)}Mb")
-            runOnUiThread {
-                imageView.setImageBitmap(bitmap)
-            }
+            //            val bitmap = ThumbnailUtils.getRoundThumbnailBitmap(imagePath, 50F, imageView.height, imageView.width)
+//            Logger.d("scaleBitmap size:${(bitmap?.byteCount ?: 0).toFloat() / (1024 * 1024)}Mb")
+//            runOnUiThread {
+//                imageView.setImageBitmap(bitmap)
+//            }
         }
     }
 

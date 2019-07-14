@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
 import android.widget.ToggleButton
-import cf.android666.applibrary.AutomateLoadingListView
 import cf.android666.applibrary.Logger
+import cf.android666.applibrary.view.AutomateLoadingListView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlin.concurrent.thread
 

@@ -1,4 +1,4 @@
-package cf.android666.applibrary
+package cf.android666.applibrary.utils
 
 import android.animation.ValueAnimator
 import android.support.v7.widget.GridLayoutManager

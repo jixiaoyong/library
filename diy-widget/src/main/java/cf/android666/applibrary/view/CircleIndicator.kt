@@ -1,4 +1,4 @@
-package cf.android666.applibrary
+package cf.android666.applibrary.view
 
 import android.annotation.SuppressLint
 import android.annotation.TargetApi

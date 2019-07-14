@@ -14,11 +14,10 @@ object Logger {
 
     @JvmStatic
     var isLog = true
-        private set
 
     @JvmStatic
     fun generateTag(): String {
-        val stack = Thread.currentThread().stackTrace[3]
+        val stack = Thread.currentThread().stackTrace[4]
         return "${stack.className}.${stack.methodName}(Line:${stack.lineNumber})"
     }
 

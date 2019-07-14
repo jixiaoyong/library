@@ -1,4 +1,4 @@
-package cf.android666.applibrary
+package cf.android666.applibrary.utils
 
 import android.content.Context
 import android.graphics.Bitmap

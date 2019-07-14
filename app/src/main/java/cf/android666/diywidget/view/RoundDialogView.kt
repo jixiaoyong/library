@@ -6,8 +6,8 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import cf.android666.applibrary.BasicRoundDialog
-import cf.android666.applibrary.DpPxUtils
+import cf.android666.applibrary.utils.DpPxUtils
+import cf.android666.applibrary.view.BasicRoundDialog
 
 /**
  * author: jixiaoyong

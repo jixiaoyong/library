@@ -1,4 +1,4 @@
-package cf.android666.applibrary;
+package cf.android666.applibrary.view;
 
 import android.animation.ValueAnimator;
 import android.content.Context;
@@ -9,6 +9,8 @@ import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.widget.ToggleButton;
+
+import cf.android666.applibrary.R;
 
 /**
  * Created by jixiaoyong on 2018/2/18.

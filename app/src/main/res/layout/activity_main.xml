@@ -7,12 +7,12 @@
     android:orientation="vertical">
 
 
-    <cf.android666.applibrary.AutomateLoadingListView
+    <cf.android666.applibrary.view.AutomateLoadingListView
         android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="300dp">
 
-    </cf.android666.applibrary.AutomateLoadingListView>
+    </cf.android666.applibrary.view.AutomateLoadingListView>
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -24,14 +24,14 @@
             android:orientation="vertical"
             tools:context="cf.android666.diywidget.MainActivity">
 
-            <cf.android666.applibrary.ToggleButtonPlus
+            <cf.android666.applibrary.view.ToggleButtonPlus
                 android:id="@+id/toggle_button"
                 android:layout_width="100dp"
                 android:layout_height="50dp"
                 android:textOff="off"
                 android:textOn="on" />
 
-            <cf.android666.applibrary.ToggleButtonPlus
+            <cf.android666.applibrary.view.ToggleButtonPlus
                 android:id="@+id/toggle_button1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -39,7 +39,7 @@
                 android:textOff="off"
                 android:textOn="on" />
 
-            <cf.android666.applibrary.ProgressButton
+            <cf.android666.applibrary.view.ProgressButton
                 android:id="@+id/progress"
                 android:layout_width="134dp"
                 android:layout_height="37dp"
@@ -57,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:text="GO_SCALE_ACTIVITY" />
 
-            <cf.android666.applibrary.ColorfulTextView
+            <cf.android666.applibrary.view.ColorfulTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Hello World" />

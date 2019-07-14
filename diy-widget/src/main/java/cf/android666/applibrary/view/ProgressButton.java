@@ -1,4 +1,4 @@
-package cf.android666.applibrary;
+package cf.android666.applibrary.view;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -10,6 +10,8 @@ import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.util.AttributeSet;
+
+import cf.android666.applibrary.R;
 
 
 /**

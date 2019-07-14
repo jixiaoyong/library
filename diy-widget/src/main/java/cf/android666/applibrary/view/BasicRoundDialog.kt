@@ -1,4 +1,4 @@
-package cf.android666.applibrary
+package cf.android666.applibrary.view
 
 import android.app.Dialog
 import android.content.Context
@@ -9,6 +9,8 @@ import android.view.View
 import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.TextView
+import cf.android666.applibrary.R
+import cf.android666.applibrary.utils.DpPxUtils
 
 /**
  *  Created by jixiaoyong1995@gmail.com

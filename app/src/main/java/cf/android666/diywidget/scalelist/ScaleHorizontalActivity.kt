@@ -7,7 +7,7 @@ import android.support.v7.widget.LinearSmoothScroller
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 import android.widget.TextView
-import cf.android666.applibrary.ImmersiveUtils
+import cf.android666.applibrary.utils.ImmersiveUtils
 import cf.android666.diywidget.R
 import cf.android666.diywidget.view.RoundDialogView
 import kotlinx.android.synthetic.main.activity_scale.*

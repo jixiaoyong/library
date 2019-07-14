@@ -7,7 +7,7 @@ import android.graphics.Paint
 import android.graphics.Rect
 import android.support.v7.widget.RecyclerView
 import android.view.View
-import cf.android666.applibrary.DpPxUtils
+import cf.android666.applibrary.utils.DpPxUtils
 
 /**
  * author: jixiaoyong

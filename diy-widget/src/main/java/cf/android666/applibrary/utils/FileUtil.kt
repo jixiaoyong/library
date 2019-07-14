@@ -1,4 +1,4 @@
-package cf.android666.applibrary
+package cf.android666.applibrary.utils
 
 /**
  *  Created by jixiaoyong1995@gmail.com

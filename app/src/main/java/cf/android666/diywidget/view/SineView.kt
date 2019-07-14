@@ -8,8 +8,8 @@ import android.graphics.Path
 import android.os.Build
 import android.support.annotation.RequiresApi
 import android.util.AttributeSet
-import cf.android666.applibrary.CommonSurfaceView
-import cf.android666.applibrary.DpPxUtils
+import cf.android666.applibrary.utils.DpPxUtils
+import cf.android666.applibrary.view.CommonSurfaceView
 import kotlin.math.sin
 
 /**

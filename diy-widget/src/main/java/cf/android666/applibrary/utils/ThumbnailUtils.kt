@@ -1,4 +1,4 @@
-package cf.android666.applibrary
+package cf.android666.applibrary.utils
 
 //import net.pbdavey.awt.Graphics2D
 //import org.apache.poi.hslf.usermodel.SlideShow
@@ -35,7 +35,8 @@ object ThumbnailUtils {
     }
 
     fun getRoundThumbnailBitmap(fileName: String, roundPx: Float = 10F, height: Int = 260, width: Int = 317): Bitmap? {
-        val bitmap = getThumbnailBitmap(fileName, height, width) ?: return null
+        val bitmap = getThumbnailBitmap(fileName, height, width)
+                ?: return null
         return getRoundedCornerBitmap(bitmap, roundPx)
     }
 

@@ -1,4 +1,4 @@
-package cf.android666.myapplication.dispatchtouchevent
+package cf.android666.applibrary.view
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView

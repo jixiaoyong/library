@@ -1,4 +1,4 @@
-package cf.android666.applibrary
+package cf.android666.applibrary.view
 
 import android.content.Context
 import android.os.Build
@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.widget.ListView
+import cf.android666.applibrary.R
 
 /**
  * author: jixiaoyong

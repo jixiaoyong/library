@@ -1,4 +1,4 @@
-package cf.android666.applibrary
+package cf.android666.applibrary.view
 
 import android.content.Context
 import android.graphics.Canvas
