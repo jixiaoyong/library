@@ -3,6 +3,8 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-android'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
+/* 2/4.适配kotlin */
+apply plugin: 'org.jetbrains.dokka'
 
 android {
     compileSdkVersion 26
@@ -60,9 +62,29 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
     from javadoc.destinationDir
 }
 
+/* 3/4.适配kotlin */
+
+task dokkaJavadoc(type: org.jetbrains.dokka.gradle.DokkaTask) {
+    outputFormat = 'javadoc'
+    outputDirectory = javadoc.destinationDir
+}
+task generateJavadoc(type: Jar, dependsOn: dokkaJavadoc) {
+    group = 'jar'
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+task generateSourcesJar(type: Jar) {
+    group = 'jar'
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
 artifacts {
-    archives javadocJar
-    archives sourcesJar
+    /* 4/4.适配kotlin */
+//    archives javadocJar
+//    archives sourcesJar
+    archives generateJavadoc //javadocJar
+    archives generateSourcesJar //sourcesJar
 }
 
 // 你只需要把这里的参数修改为自己的库名称即可
@@ -70,7 +92,7 @@ ext {
     userOrg = 'jixiaoyong' //bintray username
     siteUrl = 'www.android666.cf'
     gitUrl = 'https://github.com/jixiaoyong/DiyWidget.git'
-    currentVersion = '0.0.2' //版本号
+    currentVersion = '0.0.3' //版本号
     groupId = 'com.github.jixiaoyong' //jcenter 上的路径
     artifactId = 'diy-widget' //项目名称
     desc = 'Android Diy Widget'
@@ -135,3 +157,8 @@ bintray {
 repositories {
     mavenCentral()
 }
+
+/*README 上传到bintray：
+1.打开gradle
+2.运行publishing/bintrayUpload
+*/
