@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.MotionEvent
 import cf.android666.applibrary.Logger
 import cf.android666.applibrary.utils.DpPxUtils
+import cf.android666.applibrary.utils.ImmersiveUtils
 import kotlinx.android.synthetic.main.activity_scrolling.*
 import kotlinx.android.synthetic.main.content_scrolling.*
 
@@ -18,7 +19,7 @@ class ScrollingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_scrolling)
 
-//        ImmersiveUtils.setTransparentStateBar(window)
+        ImmersiveUtils.setTransparentStateBar(window)
 
         top = DpPxUtils.dip2px(this, 150).toFloat()
 
