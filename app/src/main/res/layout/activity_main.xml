@@ -10,7 +10,7 @@
     <cf.android666.applibrary.view.AutomateLoadingListView
         android:id="@+id/listView"
         android:layout_width="match_parent"
-        android:layout_height="300dp">
+        android:layout_height="100dp">
 
     </cf.android666.applibrary.view.AutomateLoadingListView>
 
