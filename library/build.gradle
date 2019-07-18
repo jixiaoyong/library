@@ -1,6 +1,6 @@
 apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 /* 2/4.适配kotlin */
@@ -92,9 +92,9 @@ ext {
     userOrg = 'jixiaoyong' //bintray username
     siteUrl = 'www.android666.cf'
     gitUrl = 'https://github.com/jixiaoyong/DiyWidget.git'
-    currentVersion = '0.0.3' //版本号
+    currentVersion = '0.0.1' //版本号
     groupId = 'com.github.jixiaoyong' //jcenter 上的路径
-    artifactId = 'diy-widget' //项目名称
+    artifactId = 'library' //项目名称
     desc = 'Android Diy Widget'
 }
 
