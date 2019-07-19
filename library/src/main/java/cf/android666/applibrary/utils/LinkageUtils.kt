@@ -108,7 +108,7 @@ object LinkageUtils {
     //是否向下或者向右拖动
     private fun checkCanOverScrollDownOrRight(view: View): Boolean {
         return when (view) {
-            is ListView -> view.getChildAt(0).top == 0
+            is ListView -> view.getChildAt(0)?.top == 0
             is RecyclerView -> {
                 val isVertical = when (val mng = view.layoutManager) {
                     is LinearLayoutManager -> mng.orientation == LinearLayoutManager.HORIZONTAL
