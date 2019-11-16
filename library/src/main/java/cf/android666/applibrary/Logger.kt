@@ -29,9 +29,13 @@ object Logger {
     }
 
     @JvmStatic
-    fun e(any: Any) {
+    fun e(any: Any, e: Exception? = null) {
         if (isLog) {
-            Log.e(generateTag(), any.toString())
+            if (e != null) {
+                Log.e(generateTag(), any.toString(), e)
+            } else {
+                Log.e(generateTag(), any.toString())
+            }
         }
     }
 
