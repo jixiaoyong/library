@@ -1,9 +1,8 @@
 package cf.android666.diywidget.scalelist
 
 import android.content.Context
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.util.Log
+import androidx.recyclerview.widget.LinearLayoutManager
 
 /**
  * author: jixiaoyong
@@ -24,12 +23,12 @@ class ScaleLinearLayoutManager2(context: Context, private val mOrientation: Int 
 
     private var DEFAULT_SCALE = 0.6F
 
-    override fun onLayoutChildren(recycler: RecyclerView.Recycler?, state: RecyclerView.State?) {
+    override fun onLayoutChildren(recycler: androidx.recyclerview.widget.RecyclerView.Recycler?, state: androidx.recyclerview.widget.RecyclerView.State?) {
         super.onLayoutChildren(recycler, state)
         drawChild(recycler)
     }
 
-    override fun scrollHorizontallyBy(dx: Int, recycler: RecyclerView.Recycler?, state: RecyclerView.State?): Int {
+    override fun scrollHorizontallyBy(dx: Int, recycler: androidx.recyclerview.widget.RecyclerView.Recycler?, state: androidx.recyclerview.widget.RecyclerView.State?): Int {
         val result = super.scrollHorizontallyBy(dx, recycler, state)
         if (mOrientation == HORIZONTAL) {
             offset += dx
@@ -38,7 +37,7 @@ class ScaleLinearLayoutManager2(context: Context, private val mOrientation: Int 
         return result
     }
 
-    private fun drawChild(recycler: RecyclerView.Recycler?) {
+    private fun drawChild(recycler: androidx.recyclerview.widget.RecyclerView.Recycler?) {
 
         if (recycler == null) {
             return

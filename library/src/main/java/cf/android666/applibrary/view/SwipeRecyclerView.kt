@@ -1,7 +1,6 @@
 package cf.android666.applibrary.view
 
 import android.content.Context
-import android.support.v7.widget.RecyclerView
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
@@ -18,7 +17,7 @@ import android.view.ViewGroup
  * 使用时需要设置 要展示的view Id： recyler.setMoreViewId(R.id.more)
  */
 class SwipeRecyclerView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyle: Int = 0) :
-    RecyclerView(context, attrs, defStyle) {
+        androidx.recyclerview.widget.RecyclerView(context, attrs, defStyle) {
 
     //滑动误差范围
     private val SWIPE_OFFSET = 50

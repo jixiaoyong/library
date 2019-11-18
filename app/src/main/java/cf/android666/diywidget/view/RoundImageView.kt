@@ -6,9 +6,9 @@ import android.graphics.Canvas
 import android.graphics.Path
 import android.graphics.RectF
 import android.os.Build
-import android.support.annotation.RequiresApi
 import android.util.AttributeSet
 import android.widget.ImageView
+import androidx.annotation.RequiresApi
 import cf.android666.diywidget.R
 import kotlin.math.min
 

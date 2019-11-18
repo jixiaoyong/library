@@ -6,8 +6,8 @@ import android.graphics.LinearGradient
 import android.graphics.Matrix
 import android.graphics.Shader
 import android.os.Build
-import android.support.annotation.RequiresApi
 import android.util.AttributeSet
+import androidx.annotation.RequiresApi
 
 /**
  * author: jixiaoyong

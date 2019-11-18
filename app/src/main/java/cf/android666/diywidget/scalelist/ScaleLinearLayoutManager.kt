@@ -1,10 +1,9 @@
 package cf.android666.diywidget.scalelist
 
 import android.content.Context
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.helper.ItemTouchHelper
 import android.view.MotionEvent
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.LinearLayoutManager
 
 /**
  * author: jixiaoyong
@@ -13,7 +12,7 @@ import android.view.MotionEvent
  * date: 2019-06-29
  * description: todo
  */
-class ScaleLinearLayoutManager(context: Context, private val mRecyclerView: RecyclerView,
+class ScaleLinearLayoutManager(context: Context, private val mRecyclerView: androidx.recyclerview.widget.RecyclerView,
                                private val mItemTouchHelper: ItemTouchHelper, orientation: Int = VERTICAL,
                                reverseLayout: Boolean = false)
     : LinearLayoutManager(context, orientation, reverseLayout) {
@@ -22,7 +21,7 @@ class ScaleLinearLayoutManager(context: Context, private val mRecyclerView: Recy
     private var DEFAULT_SHOW_ITEM_COUNT = 3
     private var DEFAULT_SCALE = 0.1F
 
-    override fun onLayoutChildren(recycler: RecyclerView.Recycler?, state: RecyclerView.State?) {
+    override fun onLayoutChildren(recycler: androidx.recyclerview.widget.RecyclerView.Recycler?, state: androidx.recyclerview.widget.RecyclerView.State?) {
         super.onLayoutChildren(recycler, state)
 
         if (recycler == null) {

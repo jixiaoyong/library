@@ -2,11 +2,10 @@ package cf.android666.diywidget.scalelist
 
 import android.app.Activity
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.LinearSmoothScroller
-import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearSmoothScroller
 import cf.android666.applibrary.utils.ImmersiveUtils
 import cf.android666.diywidget.R
 import cf.android666.diywidget.view.RoundDialogView
@@ -25,7 +24,7 @@ class ScaleHorizontalActivity : Activity() {
     private var scrollPositionAfterScroll: Int = -1
     private var shouldScrollAfterScroll: Boolean = false
 
-    private var orientation = LinearLayoutManager.VERTICAL
+    private var orientation = androidx.recyclerview.widget.LinearLayoutManager.VERTICAL
     private val hasDecorationMap: MutableMap<Int, String> = mutableMapOf()
     private val datas: ArrayList<String> = arrayListOf()
 
@@ -38,14 +37,14 @@ class ScaleHorizontalActivity : Activity() {
         initData()
 
         recycler.layoutManager = LinearLayoutManager(this, orientation, false)
-        recycler.adapter = object : RecyclerView.Adapter<RoundDialogView.VH>() {
+        recycler.adapter = object : androidx.recyclerview.widget.RecyclerView.Adapter<RoundDialogView.VH>() {
             override fun onCreateViewHolder(p0: ViewGroup, viewType: Int): RoundDialogView.VH = RoundDialogView.VH(
                     layoutInflater.inflate(R.layout.item_scale_view, p0, false))
 
             override fun getItemCount() = mItemCount
 
             override fun onBindViewHolder(p0: RoundDialogView.VH, position: Int) {
-                p0?.itemView?.findViewById<TextView>(R.id.textview)?.text = "Hello $position"
+                p0.itemView.findViewById<TextView>(R.id.textview)?.text = "Hello $position"
             }
 
         }
@@ -54,15 +53,15 @@ class ScaleHorizontalActivity : Activity() {
             override fun shouldHaveDecoration(position: Int): Boolean {
                 return when (position) {
                     0 -> true
-                    else -> (datas[position - 1]!! != datas[position])
+                    else -> (datas[position - 1] != datas[position])
                 }
             }
 
-            override fun getTitle(position: Int) = datas[position]!!
+            override fun getTitle(position: Int) = datas[position]
 
         })
-        recycler.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+        recycler.addOnScrollListener(object : androidx.recyclerview.widget.RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: androidx.recyclerview.widget.RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
                 if (shouldScrollAfterScroll && scrollPositionAfterScroll != -1) {
                     recyclerScrollToPosition(scrollPositionAfterScroll)
@@ -73,7 +72,7 @@ class ScaleHorizontalActivity : Activity() {
 
 
         listMenu.layoutManager = LinearLayoutManager(this, orientation, false)
-        listMenu.adapter = object : RecyclerView.Adapter<RoundDialogView.VH>() {
+        listMenu.adapter = object : androidx.recyclerview.widget.RecyclerView.Adapter<RoundDialogView.VH>() {
 
 
             override fun onCreateViewHolder(p0: ViewGroup, viewType: Int): RoundDialogView.VH = RoundDialogView.VH(
@@ -82,9 +81,9 @@ class ScaleHorizontalActivity : Activity() {
             override fun getItemCount() = hasDecorationMap.size
 
             override fun onBindViewHolder(holder: RoundDialogView.VH, position: Int) {
-                holder?.itemView?.findViewById<TextView>(android.R.id.text1)?.text =
+                holder.itemView.findViewById<TextView>(android.R.id.text1)?.text =
                         hasDecorationMap[hasDecorationMap.keys.toIntArray()[position]]
-                holder?.itemView?.setOnClickListener {
+                holder.itemView.setOnClickListener {
                     val key = hasDecorationMap.keys.toIntArray()[position]
                     recyclerScrollToPosition(key)
                 }
@@ -96,7 +95,7 @@ class ScaleHorizontalActivity : Activity() {
     }
 
     private fun recyclerScrollToPosition(position: Int) {
-        val layoutManager: LinearLayoutManager = recycler.layoutManager as LinearLayoutManager
+        val layoutManager: androidx.recyclerview.widget.LinearLayoutManager = recycler.layoutManager as androidx.recyclerview.widget.LinearLayoutManager
         val linearSmoothScroller = object : LinearSmoothScroller(recycler.context) {
             override fun getVerticalSnapPreference(): Int {
                 return SNAP_TO_START

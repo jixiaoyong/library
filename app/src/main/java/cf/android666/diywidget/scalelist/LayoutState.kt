@@ -16,7 +16,6 @@
 
 package cf.android666.diywidget.scalelist
 
-import android.support.v7.widget.RecyclerView
 import android.view.View
 
 /**
@@ -75,7 +74,7 @@ internal class LayoutState {
     /**
      * @return true if there are more items in the data adapter
      */
-    fun hasMore(state: RecyclerView.State): Boolean {
+    fun hasMore(state: androidx.recyclerview.widget.RecyclerView.State): Boolean {
         return mCurrentPosition >= 0 && mCurrentPosition < state.itemCount
     }
 
@@ -85,7 +84,7 @@ internal class LayoutState {
      *
      * @return The next element that we should render.
      */
-    fun next(recycler: RecyclerView.Recycler): View {
+    fun next(recycler: androidx.recyclerview.widget.RecyclerView.Recycler): View {
         val view = recycler.getViewForPosition(mCurrentPosition)
         mCurrentPosition += mItemDirection
         return view

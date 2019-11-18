@@ -1,13 +1,12 @@
 package cf.android666.applibrary.utils
 
 import android.animation.ValueAnimator
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.StaggeredGridLayoutManager
 import android.view.MotionEvent
 import android.view.View
 import android.widget.ListView
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import kotlin.math.abs
 
 /**
@@ -109,11 +108,11 @@ object LinkageUtils {
     private fun checkCanOverScrollDownOrRight(view: View): Boolean {
         return when (view) {
             is ListView -> view.getChildAt(0)?.top == 0
-            is RecyclerView -> {
+            is androidx.recyclerview.widget.RecyclerView -> {
                 val isVertical = when (val mng = view.layoutManager) {
-                    is LinearLayoutManager -> mng.orientation == LinearLayoutManager.HORIZONTAL
-                    is GridLayoutManager -> mng.orientation == GridLayoutManager.HORIZONTAL
-                    is StaggeredGridLayoutManager -> mng.orientation == StaggeredGridLayoutManager.HORIZONTAL
+                    is androidx.recyclerview.widget.LinearLayoutManager -> mng.orientation == androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL
+                    is androidx.recyclerview.widget.GridLayoutManager -> mng.orientation == androidx.recyclerview.widget.GridLayoutManager.HORIZONTAL
+                    is androidx.recyclerview.widget.StaggeredGridLayoutManager -> mng.orientation == androidx.recyclerview.widget.StaggeredGridLayoutManager.HORIZONTAL
                     else -> return false//不知名布局，为了效果，不可OverScroll
                 }
                 if (isVertical) {

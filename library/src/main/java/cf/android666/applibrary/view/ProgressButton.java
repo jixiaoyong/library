@@ -18,7 +18,7 @@ import cf.android666.applibrary.R;
  * Created by jixiaoyong on 2018/2/19.
  */
 
-public class ProgressButton extends android.support.v7.widget.AppCompatButton {
+public class ProgressButton extends androidx.appcompat.widget.AppCompatButton {
 
     private int mHeight;
     private int mWidth;

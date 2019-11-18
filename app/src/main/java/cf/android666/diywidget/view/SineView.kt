@@ -6,8 +6,8 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Path
 import android.os.Build
-import android.support.annotation.RequiresApi
 import android.util.AttributeSet
+import androidx.annotation.RequiresApi
 import cf.android666.applibrary.utils.DpPxUtils
 import cf.android666.applibrary.view.CommonSurfaceView
 import kotlin.math.sin

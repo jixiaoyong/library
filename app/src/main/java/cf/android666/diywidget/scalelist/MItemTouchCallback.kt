@@ -1,7 +1,6 @@
 package cf.android666.diywidget.scalelist
 
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.helper.ItemTouchHelper
+import androidx.recyclerview.widget.ItemTouchHelper
 
 
 /**
@@ -12,26 +11,26 @@ import android.support.v7.widget.helper.ItemTouchHelper
  * description: todo
  */
 class MItemTouchCallback(private val dataList: ArrayList<String>,
-                         private val adapter: RecyclerView.Adapter<RecyclerView.ViewHolder>,
+                         private val adapter: androidx.recyclerview.widget.RecyclerView.Adapter<androidx.recyclerview.widget.RecyclerView.ViewHolder>,
                          private val mListener: OnSwipeListener<String>?) : ItemTouchHelper.Callback() {
 
-    override fun getMovementFlags(recyclerView: RecyclerView, p1: RecyclerView.ViewHolder): Int {
+    override fun getMovementFlags(recyclerView: androidx.recyclerview.widget.RecyclerView, p1: androidx.recyclerview.widget.RecyclerView.ViewHolder): Int {
         val dragFlag = 0
         var swipeFlag = 0
-        if (recyclerView?.layoutManager is ScaleLinearLayoutManager) {
+        if (recyclerView.layoutManager is ScaleLinearLayoutManager) {
             swipeFlag = ItemTouchHelper.RIGHT or ItemTouchHelper.LEFT
         }
         return makeMovementFlags(dragFlag, swipeFlag)
     }
 
-    override fun onMove(p0: RecyclerView, p1: RecyclerView.ViewHolder, p2: RecyclerView.ViewHolder): Boolean {
+    override fun onMove(p0: androidx.recyclerview.widget.RecyclerView, p1: androidx.recyclerview.widget.RecyclerView.ViewHolder, p2: androidx.recyclerview.widget.RecyclerView.ViewHolder): Boolean {
         return false
     }
 
-    override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-        viewHolder?.itemView?.setOnTouchListener(null)
+    override fun onSwiped(viewHolder: androidx.recyclerview.widget.RecyclerView.ViewHolder, direction: Int) {
+        viewHolder.itemView.setOnTouchListener(null)
 
-        val currentPosition = viewHolder!!.layoutPosition
+        val currentPosition = viewHolder.layoutPosition
         val remove = dataList.removeAt(currentPosition)
         adapter.notifyDataSetChanged()
         mListener?.onSwiped(viewHolder, remove,

@@ -3,19 +3,18 @@
     package="cf.android666.diywidget">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name=".MainApplication"
+        android:name=".log.MainApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".ToastActivity"
-            android:label="@string/title_activity_scrolling"
-            android:theme="@style/AppTheme.NoActionBar">
+
+        <activity android:name=".banner.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

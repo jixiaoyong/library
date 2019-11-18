@@ -3,9 +3,9 @@ package cf.android666.applibrary.view
 import android.content.Context
 import android.graphics.*
 import android.os.Build
-import android.support.annotation.RequiresApi
 import android.util.AttributeSet
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 
 /**
  * author: jixiaoyong

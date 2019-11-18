@@ -2,9 +2,9 @@ package cf.android666.diywidget
 
 import android.animation.ValueAnimator
 import android.os.Bundle
-import android.support.v4.widget.NestedScrollView
-import android.support.v7.app.AppCompatActivity
 import android.view.MotionEvent
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.NestedScrollView
 import cf.android666.applibrary.Logger
 import cf.android666.applibrary.utils.DpPxUtils
 import cf.android666.applibrary.utils.ImmersiveUtils

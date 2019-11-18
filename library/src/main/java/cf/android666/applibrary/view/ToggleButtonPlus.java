@@ -6,9 +6,12 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.widget.ToggleButton;
+
+import androidx.annotation.RequiresApi;
 
 import cf.android666.applibrary.R;
 
@@ -31,6 +34,7 @@ public class ToggleButtonPlus extends ToggleButton {
     private float cx;
     private float cy;
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public ToggleButtonPlus(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
 
@@ -44,15 +48,21 @@ public class ToggleButtonPlus extends ToggleButton {
     }
 
     public ToggleButtonPlus(Context context, AttributeSet attrs, int defStyleAttr) {
-        this(context, attrs, defStyleAttr, 0);
+        super(context, attrs, defStyleAttr);
+        TypedArray array = context.obtainStyledAttributes(attrs,
+                R.styleable.ToggleButtonPlus, defStyleAttr, 0);
+
+        mBackgroundColor = array.getColor(R.styleable.ToggleButtonPlus_background_color, 0xff09bb07);
+        mForwardColor = array.getColor(R.styleable.ToggleButtonPlus_forward_color, 0xfff5f5f5);
+        mStrokeColor = array.getColor(R.styleable.ToggleButtonPlus_stroke_color, 0xddaaaaab);
     }
 
     public ToggleButtonPlus(Context context, AttributeSet attrs) {
-        this(context, attrs, 0, 0);
+        this(context, attrs, 0);
     }
 
     public ToggleButtonPlus(Context context) {
-        this(context, null, 0, 0);
+        this(context, null, 0);
     }
 
 

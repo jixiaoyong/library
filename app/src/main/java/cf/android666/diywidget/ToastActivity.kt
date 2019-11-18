@@ -1,8 +1,8 @@
 package cf.android666.diywidget
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.view.Gravity
+import androidx.appcompat.app.AppCompatActivity
 import cf.android666.applibrary.view.Toast
 import kotlinx.android.synthetic.main.activity_toast.*
 

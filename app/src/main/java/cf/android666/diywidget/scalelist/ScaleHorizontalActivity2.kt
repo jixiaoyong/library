@@ -2,10 +2,9 @@ package cf.android666.diywidget.scalelist
 
 import android.app.Activity
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
 import cf.android666.applibrary.utils.ImmersiveUtils
 import cf.android666.diywidget.R
 import cf.android666.diywidget.view.RoundDialogView
@@ -22,7 +21,7 @@ class ScaleHorizontalActivity2 : Activity() {
 
     private val mItemCount: Int = 100
 
-    private var orientation = LinearLayoutManager.HORIZONTAL
+    private var orientation = androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL
     private val hasDecorationMap: MutableMap<Int, String> = mutableMapOf()
     private val datas: ArrayList<String> = arrayListOf()
 
@@ -34,21 +33,22 @@ class ScaleHorizontalActivity2 : Activity() {
 
         initData()
 
-        val adapter: RecyclerView.Adapter<RecyclerView.ViewHolder> = object : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+        val adapter: androidx.recyclerview.widget.RecyclerView.Adapter<androidx.recyclerview.widget.RecyclerView.ViewHolder> = object : androidx.recyclerview.widget.RecyclerView.Adapter<androidx.recyclerview.widget.RecyclerView.ViewHolder>() {
 
-            override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder = RoundDialogView.VH(
+            override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): androidx.recyclerview.widget.RecyclerView.ViewHolder = RoundDialogView.VH(
                     layoutInflater.inflate(R.layout.item_scale_view2, parent, false))
 
             override fun getItemCount() = datas.size
 
-            override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-                holder?.itemView?.findViewById<TextView>(R.id.textview)?.text = datas[position]
+            override fun onBindViewHolder(holder: androidx.recyclerview.widget.RecyclerView.ViewHolder, position: Int) {
+                holder.itemView.findViewById<TextView>(R.id.textview)?.text = datas[position]
             }
 
         }
         recycler.adapter = adapter
         recycler.layoutManager = ScaleLinearLayoutManager2(this, orientation, false)
 //        LinearSnapHelper().attachToRecyclerView(recycler)
+
     }
 
     private val wuDiString = "宇宙第N无敌帅"

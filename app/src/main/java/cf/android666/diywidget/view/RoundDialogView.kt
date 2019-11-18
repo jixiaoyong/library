@@ -1,11 +1,11 @@
 package cf.android666.diywidget.view
 
 import android.content.Context
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import cf.android666.applibrary.utils.DpPxUtils
 import cf.android666.applibrary.view.BasicRoundDialog
 
@@ -19,14 +19,14 @@ import cf.android666.applibrary.view.BasicRoundDialog
 class RoundDialogView(context: Context) : BasicRoundDialog(context, null, "Choose something") {
     override fun getContentView(): View {
         val view = RecyclerView(context)
-        view.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        view.adapter = object : RecyclerView.Adapter<VH>() {
+        view.layoutManager = LinearLayoutManager(context, androidx.recyclerview.widget.LinearLayoutManager.VERTICAL, false)
+        view.adapter = object : androidx.recyclerview.widget.RecyclerView.Adapter<VH>() {
             override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH = VH(layoutInflater.inflate(android.R.layout.simple_dropdown_item_1line, parent, false))
 
             override fun getItemCount() = 300
 
             override fun onBindViewHolder(holder: VH, position: Int) {
-                holder?.itemView?.findViewById<TextView>(android.R.id.text1)?.text = "Hello $position"
+                holder.itemView.findViewById<TextView>(android.R.id.text1)?.text = "Hello $position"
             }
 
         }
@@ -34,6 +34,6 @@ class RoundDialogView(context: Context) : BasicRoundDialog(context, null, "Choos
         return view
     }
 
-    class VH(itemView: View) : RecyclerView.ViewHolder(itemView)
+    class VH(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView)
 
 }

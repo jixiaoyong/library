@@ -36,7 +36,7 @@ class RoundImageView @JvmOverloads constructor(context: Context, attrs: Attribut
 //    constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0, defStyleRes: Int)
 //            : super(context, attrs, defStyleAttr, defStyleRes) {
 //        arr = context.obtainStyledAttributes(attrs, R.styleable.RoundImageView, defStyleAttr, defStyleRes)
-//        initValue()
+//        initView()
 //    }
 
     private fun initValue() {

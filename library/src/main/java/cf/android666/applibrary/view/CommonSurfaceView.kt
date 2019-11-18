@@ -3,10 +3,10 @@ package cf.android666.applibrary.view
 import android.content.Context
 import android.graphics.Canvas
 import android.os.Build
-import android.support.annotation.RequiresApi
 import android.util.AttributeSet
 import android.view.SurfaceHolder
 import android.view.SurfaceView
+import androidx.annotation.RequiresApi
 import kotlin.concurrent.thread
 
 /**

@@ -29,4 +29,13 @@
         </attr>
     </declare-styleable>
 
+
+    <declare-styleable name="BannerView">
+        <attr name="indicatorType">
+            <enum name="point" value="0" />
+            <enum name="text" value="1" />
+            <enum name="none" value="-1" />
+        </attr>
+    </declare-styleable>
+
 </resources>

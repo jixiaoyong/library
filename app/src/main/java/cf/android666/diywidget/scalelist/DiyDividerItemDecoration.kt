@@ -5,7 +5,6 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Rect
-import android.support.v7.widget.RecyclerView
 import android.view.View
 import cf.android666.applibrary.utils.DpPxUtils
 
@@ -17,13 +16,13 @@ import cf.android666.applibrary.utils.DpPxUtils
  * description: todo
  */
 abstract class DiyDividerItemDecoration(private val context: Context)
-    : RecyclerView.ItemDecoration() {
+    : androidx.recyclerview.widget.RecyclerView.ItemDecoration() {
 
     private val outBounds: Rect = Rect()
     private var decorationWidth = 100
     private var lastTitle = ""
 
-    override fun onDraw(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
+    override fun onDraw(c: Canvas, parent: androidx.recyclerview.widget.RecyclerView, state: androidx.recyclerview.widget.RecyclerView.State) {
         super.onDraw(c, parent, state)
         if (parent == null || c == null) {
             return
@@ -61,7 +60,7 @@ abstract class DiyDividerItemDecoration(private val context: Context)
         }
     }
 
-    override fun onDrawOver(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
+    override fun onDrawOver(c: Canvas, parent: androidx.recyclerview.widget.RecyclerView, state: androidx.recyclerview.widget.RecyclerView.State) {
         super.onDrawOver(c, parent, state)
         if (parent == null || c == null) {
             return
@@ -101,11 +100,11 @@ abstract class DiyDividerItemDecoration(private val context: Context)
                 ((decorationWidth + (paint.fontMetrics.bottom - paint.fontMetrics.top) / 2) / 2) + top, paint)
     }
 
-    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+    override fun getItemOffsets(outRect: Rect, view: View, parent: androidx.recyclerview.widget.RecyclerView, state: androidx.recyclerview.widget.RecyclerView.State) {
         if (parent != null) {
             val position = parent.getChildAdapterPosition(view)
             if (shouldHaveDecoration(position)) {
-                outRect?.top = outRect?.top?.plus(decorationWidth)
+                outRect.top = outRect.top.plus(decorationWidth)
             }
         }
     }
