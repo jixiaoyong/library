@@ -1,9 +1,13 @@
 package cf.android666.applibrary.view
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Build
+import android.os.Handler
+import android.os.Message
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -70,37 +74,55 @@ class BannerView : RelativeLayout {
             }
 
             override fun onPageSelected(position: Int) {
-                val realIndex = when (position) {
-                    newFragment.size - 1 -> 1
-                    0 -> newFragment.size - 2
+                val fakeListSize = newFragment.size
+                val fakeIndex = when (position) {
+                    fakeListSize - 1 -> 1
+                    0 -> fakeListSize - 2
                     else -> position
                 }
 
-                viewPager.setCurrentItem(realIndex, false)
-                onIndicatorSelected(realIndex)
+                viewPager.setCurrentItem(fakeIndex, false)
+
+                onIndicatorSelected(viewPager.currentItem - 1)
             }
 
         })
+        viewPager.setOnTouchListener { v, event ->
+            when (event.action) {
+                MotionEvent.ACTION_DOWN -> viewPagerHandler.removeMessages(WHAT_CHANGE_VIEWPAGE)
+                MotionEvent.ACTION_UP -> startChangeViewPagerDelayed(BANNER_DURATION_MILLIS)
+            }
+            false
+        }
         setupIndicator(fragments.size, indicatorValue)
     }
 
     open fun onIndicatorSelected(position: Int) {
-        if (indicatorType == 1) {
+        if (indicatorType == IndicatorType.POINT) {
             val indicatorView = indicatorLayout.getChildAt(0) as LinearLayout
             for (i in 0 until indicatorView.childCount) {
                 val imgView = indicatorView.getChildAt(i) as ImageView
-                imgView.setBackgroundResource(if (i == position) R.drawable.ic_point_enable else R.drawable.ic_point_disable)
+                imgView.setBackgroundResource(if (i == position) R.drawable.ic_point_enable
+                else R.drawable.ic_point_disable)
             }
         }
     }
 
+
     private fun setupIndicator(size: Int, indicatorValue: Array<String>?) {
-        if (indicatorType == 1) {
-            val indicatorView = LayoutInflater.from(context).inflate(R.layout.layout_banner_indicator, null, false) as LinearLayout
+        if (indicatorType == IndicatorType.POINT) {
+            val indicatorView = LayoutInflater.from(context)
+                    .inflate(R.layout.layout_banner_indicator, null, false) as LinearLayout
             for (i in 0 until size) {
-                val imageView = LayoutInflater.from(context).inflate(R.layout.view_banner_indicator_point, null, false)
-                imageView.setBackgroundResource(if (i == 0) R.drawable.ic_point_enable else R.drawable.ic_point_disable)
+                val imageView = ImageView(context)
+
+                imageView.setBackgroundResource(if (i == 0) R.drawable.ic_point_enable
+                else R.drawable.ic_point_disable)
                 indicatorView.addView(imageView)
+
+                val lp = LinearLayout.LayoutParams(imageView.layoutParams)
+                lp.setMargins(15, 15, 15, 15)
+                imageView.layoutParams = lp
             }
             indicatorLayout.addView(indicatorView)
         }
@@ -120,7 +142,38 @@ class BannerView : RelativeLayout {
 
     }
 
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        startChangeViewPagerDelayed(BANNER_DURATION_MILLIS)
+    }
+
+    private fun startChangeViewPagerDelayed(delayTimeMillis: Long) {
+        viewPagerHandler.sendEmptyMessageDelayed(WHAT_CHANGE_VIEWPAGE, delayTimeMillis)
+    }
+
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        viewPagerHandler.removeCallbacksAndMessages(null)
+    }
+
+    val viewPagerHandler = @SuppressLint("HandlerLeak")
+    object : Handler() {
+        override fun handleMessage(msg: Message?) {
+            when (msg?.what) {
+                WHAT_CHANGE_VIEWPAGE -> {
+                    viewPager.currentItem = viewPager.currentItem + 1
+                    startChangeViewPagerDelayed(BANNER_DURATION_MILLIS)
+                }
+                else -> {
+                }
+            }
+        }
+    }
+
     companion object {
+        const val WHAT_CHANGE_VIEWPAGE = 1
+        const val BANNER_DURATION_MILLIS = 3000L
+
         object IndicatorType {
             const val POINT = 0
             const val TEXT = 1
