@@ -52,12 +52,14 @@ class BannerView : RelativeLayout {
 
     fun setViewsAndIndicator(fragmentMng: FragmentManager, fragments: List<Fragment>, indicatorValue: Array<String>? = null) {
         val newFragment = fragments.toMutableList()
-        val lastFragment = fragments[fragments.lastIndex]
-        val fragment = BannerViewHelper.ImageViewFragment()
-        fragment.imageView = lastFragment.view
-        newFragment.add(fragment)
+        val lastFragment = fragments.last()
+        val firstFragment = fragments.first()
+        val prefixFragment = BannerViewHelper.ImageViewFragment.getFragment(lastFragment.view)
+        val suffixFragment = BannerViewHelper.ImageViewFragment.getFragment(firstFragment.view)
+        newFragment.add(0, prefixFragment)
+        newFragment.add(suffixFragment)
         viewPager.adapter = VpAdapter(fragmentMng, newFragment)
-        viewPager.currentItem = 0
+        viewPager.currentItem = 1
         viewPager.addOnPageChangeListener(object : androidx.viewpager.widget.ViewPager.OnPageChangeListener {
             override fun onPageScrollStateChanged(state: Int) {
 
@@ -74,7 +76,7 @@ class BannerView : RelativeLayout {
                     else -> position
                 }
 
-                viewPager.currentItem = realIndex
+                viewPager.setCurrentItem(realIndex, false)
                 onIndicatorSelected(realIndex)
             }
 

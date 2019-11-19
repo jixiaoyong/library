@@ -31,12 +31,20 @@ object BannerViewHelper {
     }
 
 
-    class ImageViewFragment : androidx.fragment.app.Fragment() {
+    class ImageViewFragment : Fragment() {
 
         var imageView: View? = null
 
         override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
             return if (imageView != null) imageView else super.onCreateView(inflater, container, savedInstanceState)
+        }
+
+        companion object {
+            fun getFragment(imageView: View?): ImageViewFragment {
+                val fragment = ImageViewFragment()
+                fragment.imageView = imageView
+                return fragment
+            }
         }
     }
 }
