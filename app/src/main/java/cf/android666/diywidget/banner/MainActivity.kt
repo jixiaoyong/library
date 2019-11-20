@@ -1,9 +1,11 @@
 package cf.android666.diywidget.banner
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import cf.android666.applibrary.Logger
 import cf.android666.applibrary.view.BannerViewHelper
+import cf.android666.diywidget.NewActivity
 import cf.android666.diywidget.R
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_banner_main.*
@@ -24,17 +26,22 @@ class MainActivity : AppCompatActivity() {
                 "https://www.wanandroid.com/blogimgs/90c6cc12-742e-4c9f-b318-b912f163b8d0.png",
                 "https://www.wanandroid.com/blogimgs/62c1bd68-b5f3-4a3c-a649-7ca8c7dfabe6.png")
 
+        val indicatorDescList = arrayListOf(
+                "在自定义控件里面检测当前view是否被遮住显示不全", "View作为参数去判断显示情况")
 
-        val fragments = BannerViewHelper.initImageBannerOf(this, imgs.size) { imageView, i ->
-            val imgUrl = imgs[i]
-            Glide.with(imageView).load(imgUrl).into(imageView)
-            Logger.d("start load image:$imgUrl")
-        }
+        BannerViewHelper.Builder(bannerView)
+                .setFragmentManager(supportFragmentManager)
+                .addFragments(BannerViewHelper.initImageBannerOf(this, imgs.size) { imageView, i ->
+                    val imgUrl = imgs[i]
+                    Glide.with(imageView).load(imgUrl).centerCrop().into(imageView)
+                    Logger.d("start load image:$imgUrl")
+                })
+                .addIndicatorDesc(indicatorDescList)
+                .build()
 
 
-        bannerView.setViewsAndIndicator(supportFragmentManager, fragments)
-        bannerView.viewPager.setOnClickListener {
-            Logger.d("viewPager:${it}")
+        button.setOnClickListener {
+            startActivity(Intent(this@MainActivity, NewActivity::class.java))
         }
     }
 }

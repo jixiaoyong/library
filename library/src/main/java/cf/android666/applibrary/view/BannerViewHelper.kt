@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 
 /**
  * author: jixiaoyong
@@ -47,4 +48,35 @@ object BannerViewHelper {
             }
         }
     }
+
+
+    class Builder(private val bannerView: BannerView) {
+
+        private lateinit var fragmentManager: FragmentManager
+        private var fragments: List<Fragment> = arrayListOf()
+        private var indicatorDescList: List<String>? = null
+
+        fun setFragmentManager(fragmentManager: FragmentManager): Builder {
+            this.fragmentManager = fragmentManager
+            return this
+        }
+
+        /**
+         * Banner界面的内容
+         */
+        fun addFragments(fragments: List<Fragment>): Builder {
+            this.fragments = fragments
+            return this
+        }
+
+        fun addIndicatorDesc(indicatorDescList: List<String>): Builder {
+            this.indicatorDescList = indicatorDescList
+            return this
+        }
+
+        fun build() {
+            bannerView.setViewsAndIndicator(fragmentManager, fragments, indicatorDescList)
+        }
+    }
+
 }
