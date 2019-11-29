@@ -8,15 +8,15 @@ import android.os.Message
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.MotionEvent
-import android.widget.FrameLayout
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.RelativeLayout
+import android.view.View
+import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import cf.android666.applibrary.Logger
 import cf.android666.applibrary.R
 import kotlinx.android.synthetic.main.view_banner.view.*
+
 
 /**
  * author: jixiaoyong
@@ -30,8 +30,6 @@ class BannerView : RelativeLayout {
     private var indicatorType: Int = 0
     lateinit var viewPager: androidx.viewpager.widget.ViewPager
     private lateinit var indicatorLayout: FrameLayout
-
-    val startItemIndex = Int.MAX_VALUE / 2
 
     @JvmOverloads
     constructor (context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0)
@@ -54,15 +52,18 @@ class BannerView : RelativeLayout {
         a.recycle()
     }
 
-    fun setViewsAndIndicator(fragmentMng: FragmentManager, fragments: List<Fragment>, indicatorValue: Array<String>? = null) {
-        val newFragment = fragments.toMutableList()
+    @SuppressLint("ClickableViewAccessibility")
+    fun setViewsAndIndicator(fragmentMng: FragmentManager, fragments: List<Fragment>, indicatorValue: List<String>? = null) {
+        Logger.d("setViewsAndIndicator:#add Fragment")
+        val newFragmentList = fragments.toMutableList()
         val lastFragment = fragments.last()
         val firstFragment = fragments.first()
         val prefixFragment = BannerViewHelper.ImageViewFragment.getFragment(lastFragment.view)
         val suffixFragment = BannerViewHelper.ImageViewFragment.getFragment(firstFragment.view)
-        newFragment.add(0, prefixFragment)
-        newFragment.add(suffixFragment)
-        viewPager.adapter = VpAdapter(fragmentMng, newFragment)
+        newFragmentList.add(0, prefixFragment)
+        newFragmentList.add(suffixFragment)
+
+        viewPager.adapter = VpAdapter(fragmentMng, newFragmentList)
         viewPager.currentItem = 1
         viewPager.addOnPageChangeListener(object : androidx.viewpager.widget.ViewPager.OnPageChangeListener {
             override fun onPageScrollStateChanged(state: Int) {
@@ -74,7 +75,7 @@ class BannerView : RelativeLayout {
             }
 
             override fun onPageSelected(position: Int) {
-                val fakeListSize = newFragment.size
+                val fakeListSize = newFragmentList.size
                 val fakeIndex = when (position) {
                     fakeListSize - 1 -> 1
                     0 -> fakeListSize - 2
@@ -83,7 +84,7 @@ class BannerView : RelativeLayout {
 
                 viewPager.setCurrentItem(fakeIndex, false)
 
-                onIndicatorSelected(viewPager.currentItem - 1)
+                onIndicatorSelected(viewPager.currentItem - 1, indicatorValue)
             }
 
         })
@@ -97,7 +98,12 @@ class BannerView : RelativeLayout {
         setupIndicator(fragments.size, indicatorValue)
     }
 
-    open fun onIndicatorSelected(position: Int) {
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        viewPagerHandler.removeCallbacksAndMessages(null)
+    }
+
+    fun onIndicatorSelected(position: Int, indicatorValue: List<String>? = null) {
         if (indicatorType == IndicatorType.POINT) {
             val indicatorView = indicatorLayout.getChildAt(0) as LinearLayout
             for (i in 0 until indicatorView.childCount) {
@@ -105,66 +111,65 @@ class BannerView : RelativeLayout {
                 imgView.setBackgroundResource(if (i == position) R.drawable.ic_point_enable
                 else R.drawable.ic_point_disable)
             }
+        } else if (indicatorType == IndicatorType.TEXT) {
+            val indicatorView = indicatorLayout.getChildAt(0) as TextView
+            indicatorView.text = indicatorValue?.getOrNull(position) ?: ""
         }
     }
 
 
-    private fun setupIndicator(size: Int, indicatorValue: Array<String>?) {
+    private fun setupIndicator(size: Int, indicatorValue: List<String>? = null) {
         if (indicatorType == IndicatorType.POINT) {
-            val indicatorView = LayoutInflater.from(context)
-                    .inflate(R.layout.layout_banner_indicator, null, false) as LinearLayout
+            val indicatorView = LayoutInflater.from(context).inflate(
+                    R.layout.layout_banner_indicator, indicatorLayout, false) as LinearLayout
             for (i in 0 until size) {
                 val imageView = ImageView(context)
-
                 imageView.setBackgroundResource(if (i == 0) R.drawable.ic_point_enable
                 else R.drawable.ic_point_disable)
                 indicatorView.addView(imageView)
-
                 val lp = LinearLayout.LayoutParams(imageView.layoutParams)
                 lp.setMargins(15, 15, 15, 15)
                 imageView.layoutParams = lp
             }
             indicatorLayout.addView(indicatorView)
+        } else if (indicatorType == IndicatorType.TEXT) {
+            val textView = LayoutInflater.from(context)
+                    .inflate(R.layout.view_banner_indicator_text, indicatorLayout, false)
+                    as TextView
+            textView.text = indicatorValue?.get(0)
+            indicatorLayout.addView(textView)
         }
     }
 
-    inner class VpAdapter(fragmentManager: FragmentManager, private val fragments: List<Fragment>)
-        : androidx.fragment.app.FragmentPagerAdapter(fragmentManager) {
 
-        override fun getItem(position: Int): Fragment {
-//            val realIndex = abs(position - startItemIndex) % fragments.size
-            return fragments[position]
+    override fun onWindowVisibilityChanged(visibility: Int) {
+        super.onWindowVisibilityChanged(visibility)
+        if (visibility == View.VISIBLE) {
+            startChangeViewPagerDelayed(BANNER_DURATION_MILLIS)
+        } else if (visibility == View.INVISIBLE || visibility == View.GONE) {
+            viewPagerHandler.removeCallbacksAndMessages(null)
         }
-
-        override fun getCount(): Int {
-            return fragments.size
-        }
-
-    }
-
-    override fun onAttachedToWindow() {
-        super.onAttachedToWindow()
-        startChangeViewPagerDelayed(BANNER_DURATION_MILLIS)
     }
 
     private fun startChangeViewPagerDelayed(delayTimeMillis: Long) {
         viewPagerHandler.sendEmptyMessageDelayed(WHAT_CHANGE_VIEWPAGE, delayTimeMillis)
     }
 
-    override fun onDetachedFromWindow() {
-        super.onDetachedFromWindow()
-        viewPagerHandler.removeCallbacksAndMessages(null)
-    }
 
-    val viewPagerHandler = @SuppressLint("HandlerLeak")
+    private val viewPagerHandler = @SuppressLint("HandlerLeak")
     object : Handler() {
         override fun handleMessage(msg: Message?) {
             when (msg?.what) {
                 WHAT_CHANGE_VIEWPAGE -> {
-                    viewPager.currentItem = viewPager.currentItem + 1
+                    try {
+                        viewPager.currentItem = viewPager.currentItem + 1
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
                     startChangeViewPagerDelayed(BANNER_DURATION_MILLIS)
                 }
                 else -> {
+
                 }
             }
         }
@@ -179,5 +184,18 @@ class BannerView : RelativeLayout {
             const val TEXT = 1
             const val NONE = -1
         }
+    }
+
+    class VpAdapter(fragmentManager: FragmentManager, private val fragments: List<Fragment>)
+        : androidx.fragment.app.FragmentPagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+
+        override fun getItem(position: Int): Fragment {
+            return fragments[position]
+        }
+
+        override fun getCount(): Int {
+            return fragments.size
+        }
+
     }
 }
