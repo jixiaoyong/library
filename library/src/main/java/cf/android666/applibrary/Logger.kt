@@ -1,25 +1,45 @@
 package cf.android666.applibrary
 
+import android.app.Application
 import android.util.Log
+import java.lang.ref.WeakReference
 
 /**
  * author: jixiaoyong
  * email: jixiaoyong1995@gmail.com
  * website: www.jixiaoyong.github.io
  * date: 2019/1/19
- * description: todo
+ * description: 日志打印类
  */
 
 object Logger {
 
+    private var applicationWeakReference: WeakReference<Application>? = null
+
+    private var isLog = true
+
     @JvmStatic
-    var isLog = true
+    fun init(application: Application, isLog: Boolean = true) {
+        applicationWeakReference = WeakReference(application)
+        this.isLog = isLog
+    }
 
     @JvmStatic
     fun generateTag(): String {
         val stack = Thread.currentThread().stackTrace[4]
-        return "${stack.className}.${stack.methodName}(Line:${stack.lineNumber})"
+        var tag = "${stack.className}.${stack.methodName}(Line:${stack.lineNumber})"
+        if (tag.length > 87) {
+            //TAG长度超过87左右就会打印不正常
+            var applicationId = applicationWeakReference?.get()?.applicationInfo?.packageName
+            applicationId = if (applicationId == null) "" else "$applicationId/"
+            tag = "${applicationId}${stack.fileName}.${stack.methodName}(Line:${stack.lineNumber})"
+            if (tag.length > 87) {
+                tag = "${applicationId}${stack.fileName} (Line:${stack.lineNumber})"
+            }
+        }
+        return tag
     }
+
 
     @JvmStatic
     fun d(any: Any) {

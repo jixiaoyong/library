@@ -1,6 +1,7 @@
 package cf.android666.diywidget.log
 
 import android.app.Application
+import cf.android666.applibrary.Logger
 import cf.android666.diywidget.BuildConfig
 import cf.android666.diywidget.utils.LogCollector
 import cf.android666.diywidget.utils.LogUtils
@@ -20,5 +21,6 @@ class MainApp : Application() {
         LogCollector.initDebug(this, BuildConfig.DEBUG)
         LogUtils.d("init method()")
         LogUtils.wtf("wwwttf")
+        Logger.init(this)
     }
 }
