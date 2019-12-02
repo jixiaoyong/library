@@ -2,7 +2,6 @@ package cf.android666.diywidget.banner
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import cf.android666.applibrary.Logger
 import cf.android666.applibrary.view.BannerViewHelper
 import cf.android666.diywidget.R
 import com.bumptech.glide.Glide
@@ -28,13 +27,13 @@ class MainActivity : AppCompatActivity() {
         val fragments = BannerViewHelper.initImageBannerOf(this, imgs.size) { imageView, i ->
             val imgUrl = imgs[i]
             Glide.with(imageView).load(imgUrl).into(imageView)
-            Logger.d("start load image:$imgUrl")
+//            Logger.d("start load image:$imgUrl")
         }
 
 
         bannerView.setViewsAndIndicator(supportFragmentManager, fragments)
         bannerView.viewPager.setOnClickListener {
-            Logger.d("viewPager:${it}")
+//            Logger.d("viewPager:${it}")
         }
     }
 }

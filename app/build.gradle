@@ -8,7 +8,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "cf.android666.diywidget"
-        minSdkVersion 24
+        minSdkVersion 22
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -42,5 +42,13 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.10.0'
     kapt 'com.github.bumptech.glide:compiler:4.10.0'
 
-
+//leancloud start
+    implementation ('cn.leancloud:storage-android:6.0.5'){
+        exclude group: 'com.alibaba', module: 'fastjson'
+        exclude group: 'org.ligboy.retrofit2', module: 'converter-fastjson'
+    }
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    implementation 'com.alibaba:fastjson:1.1.71.android'
+    implementation 'org.ligboy.retrofit2:converter-fastjson-android:2.1.0'
+//leancloud end
 }

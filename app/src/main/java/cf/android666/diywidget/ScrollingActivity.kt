@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.MotionEvent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.NestedScrollView
-import cf.android666.applibrary.Logger
 import cf.android666.applibrary.utils.DpPxUtils
 import cf.android666.applibrary.utils.ImmersiveUtils
 import kotlinx.android.synthetic.main.activity_scrolling.*
@@ -35,7 +34,7 @@ class ScrollingActivity : AppCompatActivity() {
                 MotionEvent.ACTION_DOWN -> oldY = event.rawY
                 MotionEvent.ACTION_MOVE -> {
                     val dy = event.rawY - oldY
-                    Logger.d("dy:$dy")
+//                    Logger.d("dy:$dy")
                     if (dy > 0 && canOverScroll(dy)) {
                         text.translationY += dy
                     }
@@ -57,7 +56,7 @@ class ScrollingActivity : AppCompatActivity() {
         }
 
         text.setOnClickListener {
-            Logger.d("Hello world")
+//            Logger.d("Hello world")
         }
     }
 

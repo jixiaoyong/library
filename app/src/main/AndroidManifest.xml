@@ -5,6 +5,14 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <!-- leancloud 基本模块（必须）START -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!-- leancloud 基本模块 END -->
+
     <application
         android:name=".log.MainApp"
         android:allowBackup="true"
@@ -14,7 +22,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".banner.MainActivity">
+        <activity android:name=".log.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

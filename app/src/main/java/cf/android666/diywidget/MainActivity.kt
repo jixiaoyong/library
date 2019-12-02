@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
 import android.widget.ToggleButton
-import cf.android666.applibrary.Logger
 import cf.android666.applibrary.view.AutomateLoadingListView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlin.concurrent.thread
@@ -27,7 +26,7 @@ class MainActivity : Activity() {
 
         val adapter = object : BaseAdapter() {
             override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-                var view = layoutInflater.inflate(android.R.layout.activity_list_item, parent, false)
+                val view = layoutInflater.inflate(android.R.layout.activity_list_item, parent, false)
                 view.findViewById<TextView>(android.R.id.text1).text = "TextView:$position"
                 return view
             }
@@ -42,7 +41,7 @@ class MainActivity : Activity() {
         listView.adapter = adapter
         listView.loadingListener = object : AutomateLoadingListView.LoadingListener {
             override fun getFootViewType(): AutomateLoadingListView.FootViewType {
-                Logger.d("itemCount:$itemCount")
+//                Logger.d("itemCount:$itemCount")
                 return if (itemCount < 150) {
                     AutomateLoadingListView.FootViewType.LOADING
                 } else {

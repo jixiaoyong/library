@@ -1,7 +1,7 @@
 package cf.android666.diywidget
 
 import android.app.Application
-import cf.android666.applibrary.Logger
+import cf.android666.applibrary.logger.Logger
 import cf.android666.applibrary.view.Toast
 
 /**
