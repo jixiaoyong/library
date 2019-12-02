@@ -50,11 +50,15 @@ class DefaultLeancloudLogUploader(applicationContext: Context, leancloudInfo: Le
             val logDirFile = File(dirPath)
             if (logDirFile.exists() && logDirFile.isDirectory) {
                 logDirFile.list().forEach {
-                    Log.d("TAG", "start upload file $it")
-                    val avFile = AVFile.withAbsoluteLocalPath(it, dirPath + File.separator + it)
-                    avFile.saveInBackground().subscribe({},{},{
-                        Log.d("TAG", "finish upload file $it")
-                    })
+                    try {
+                        Log.d("TAG", "start upload file $it")
+                        val avFile = AVFile.withAbsoluteLocalPath(it, dirPath + File.separator + it)
+                        avFile.saveInBackground().subscribe({}, {}, {
+                            Log.d("TAG", "finish upload file $it")
+                        })
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
                 }
             }
         }

@@ -8,7 +8,9 @@ import cf.android666.applibrary.logger.LogCollector
 import cf.android666.applibrary.logger.Logger
 import cf.android666.diywidget.R
 import cf.android666.diywidget.utils.LogUtils
+import kotlinx.coroutines.*
 import pub.devrel.easypermissions.EasyPermissions
+import kotlin.concurrent.thread
 
 /**
  * author: jixiaoyong
@@ -17,7 +19,7 @@ import pub.devrel.easypermissions.EasyPermissions
  * date: 2019-09-07
  * description: 日志测试类
  */
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,10 +29,13 @@ class MainActivity : AppCompatActivity() {
         EasyPermissions.requestPermissions(this, "read storage to save log",
                 1, Manifest.permission.READ_EXTERNAL_STORAGE)
 
-        Log.d("TTTTTTTTTTag", "开始请求权限")
+//        Log.d("TTTTTTTTTTag", "开始请求权限")
         LogUtils.wtf("开始请求权限 cg")
-//        Logger.d("kaishi 开始打印Logger")
-        Logger.d("开始打印Logger 2")
+
+//        Logger.d("Logger 开始请求权限 cg")
+        Logger.d("Logger.d 开始请求权限 cg")
+
+        thisIsALongLongLongLongLongLongLongLongLongLongLongLongLongLongLongFunc()
 
         LogCollector.uploadLogToServer(false)
 
@@ -39,5 +44,18 @@ class MainActivity : AppCompatActivity() {
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this)
+    }
+
+    private fun thisIsALongLongLongLongLongLongLongLongLongLongLongLongLongLongLongFunc() {
+        Log.wtf("Log.wtf thisIsALongLongLongLongLongLongLongLongLongLongLongLongLongLongLongFuncthisIsALongLongLongLongLongLongLongLongLongLongLongLongLongLongLongFunc",
+                "开始请求权限 thisIsALongLongLongLongLongLongLongLongLongLongLongLongLongLongLongFunc")
+        thread {
+            launch {
+                withContext(Dispatchers.IO) {
+                    LogUtils.wtf("LogUtils.wtf 开始请求权限 cg")
+                    Logger.d("Logger.d 开始请求权限 cg")
+                }
+            }
+        }
     }
 }

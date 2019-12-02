@@ -1,8 +1,10 @@
 package cf.android666.applibrary.logger
 
+import android.app.Application
 import android.util.Log
 import cf.android666.applibrary.logger.LogCollector.CURRENT_LOG_FILE_PATH
 import java.io.File
+import java.lang.ref.WeakReference
 
 /**
  * author: jixiaoyong
@@ -36,6 +38,13 @@ object Logger {
      */
     private const val SINGLE_LOG_FILE_MAX_SIZE: Long = 1 * 1024 * 1024 //1Mb
 
+    private var applicationWeakReference: WeakReference<Application>? = null
+
+    @JvmStatic
+    fun init(application: Application, isLog: Boolean = true) {
+        applicationWeakReference = WeakReference(application)
+        this.isLog = isLog
+    }
 
     @JvmStatic
     fun generateTag(): String {
@@ -43,7 +52,17 @@ object Logger {
             return defTag as String
         }
         val stack = Thread.currentThread().stackTrace[7]
-        return "${stack.className}.${stack.methodName}(Line:${stack.lineNumber})"
+        var tag = "${stack.className}.${stack.methodName}(Line:${stack.lineNumber})"
+        if (tag.length > 87) {
+            //TAG长度超过87左右就会打印不正常
+            var applicationId = applicationWeakReference?.get()?.applicationInfo?.packageName
+            applicationId = if (applicationId == null) "" else "$applicationId/"
+            tag = "${applicationId}${stack.fileName}.${stack.methodName}(Line:${stack.lineNumber})"
+            if (tag.length > 87) {
+                tag = "${applicationId}${stack.fileName} (Line:${stack.lineNumber})"
+            }
+        }
+        return tag
     }
 
     @JvmStatic

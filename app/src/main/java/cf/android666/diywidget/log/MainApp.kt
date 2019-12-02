@@ -31,5 +31,6 @@ class MainApp : Application() {
                 logUploader = DefaultLeancloudLogUploader(this, DefaultLeancloudLogUploader.LeancloudInfo(
                         leancloudAppId, leancloudAppKey, leancloudServerURL
                 )))
+
     }
 }

@@ -1,7 +1,6 @@
 package cf.android666.diywidget
 
 import android.app.Application
-import cf.android666.applibrary.logger.Logger
 import cf.android666.applibrary.view.Toast
 
 /**
@@ -15,7 +14,6 @@ class MainApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        Logger.isLog = BuildConfig.DEBUG
         Toast.init(this)
     }
 }

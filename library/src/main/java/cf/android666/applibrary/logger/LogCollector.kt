@@ -1,6 +1,6 @@
 package cf.android666.applibrary.logger
 
-import android.content.Context
+import android.app.Application
 import android.os.Build
 import android.os.Environment
 import java.io.File
@@ -29,18 +29,18 @@ object LogCollector {
     var mDefaultUncaughtExceptionHandler: Thread.UncaughtExceptionHandler? = null
 
 
-    fun init(applicationContext: Context, isLog: Boolean = true, isSaveToFile: Boolean = false, defTag: String? = null,
+    fun init(application: Application, isLog: Boolean = true, isSaveToFile: Boolean = false, defTag: String? = null,
              logUploader: FileUploader? = null,
              defaultUncaughtExceptionHandler: Thread.UncaughtExceptionHandler = DefaultUncaughtExceptionHandler()) {
-        Logger.isLog = isLog
+        Logger.init(application, isLog)
         Logger.isNeedSaveToFile = isSaveToFile
         Logger.defTag = defTag
         this.logUploader = logUploader
 
-        appVerName = "appVerName:" + LoggerHelper.getVerName(applicationContext)
-        appVerCode = "appVerCode:" + LoggerHelper.getVerCode(applicationContext)
+        appVerName = "appVerName:" + LoggerHelper.getVerName(application)
+        appVerCode = "appVerCode:" + LoggerHelper.getVerCode(application)
 
-        val LOG_ROOT_PATH = "${Environment.getExternalStorageDirectory().absolutePath}/Android/data/${applicationContext.packageName}"
+        val LOG_ROOT_PATH = "${Environment.getExternalStorageDirectory().absolutePath}/Android/data/${application.packageName}"
 
         CURRENT_LOG_FILE_PATH = "$LOG_ROOT_PATH/log"
         CURRENT_ERROR_FILE_PATH = "$LOG_ROOT_PATH/error"
