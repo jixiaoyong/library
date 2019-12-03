@@ -3,6 +3,7 @@ package cf.android666.diywidget.log
 import android.app.Application
 import cf.android666.applibrary.logger.DefaultLeancloudLogUploader
 import cf.android666.diywidget.BuildConfig
+import cf.android666.diywidget.R
 import cf.android666.diywidget.utils.LogCollector
 import cf.android666.diywidget.utils.LogUtils
 
@@ -28,9 +29,14 @@ class MainApp : Application() {
         LogUtils.wtf("wwwttf")
 
         cf.android666.applibrary.logger.LogCollector.init(this, isSaveToFile = true,
-                logUploader = DefaultLeancloudLogUploader(this, DefaultLeancloudLogUploader.LeancloudInfo(
-                        leancloudAppId, leancloudAppKey, leancloudServerURL
-                )))
+                logUploader = DefaultLeancloudLogUploader(this,
+                        DefaultLeancloudLogUploader.LeancloudInfo(leancloudAppId, leancloudAppKey, leancloudServerURL),
+                        leancloudLogFileInfo = DefaultLeancloudLogUploader.LeancloudLogFileInfo(
+                                "", "", null, getString(R.string.app_name),
+                                BuildConfig.APPLICATION_ID,
+                                BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE, BuildConfig.FLAVOR
+                        )
+                ))
 
     }
 }
