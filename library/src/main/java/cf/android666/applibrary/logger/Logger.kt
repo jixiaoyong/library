@@ -130,7 +130,7 @@ object Logger {
                 logPath.mkdirs()
             }
             //2. is there too much log files?
-            val logFiles = logPath.listFiles()
+            val logFiles = logPath.listFiles() ?: arrayOf()
             if (logFiles.size > MAX_LOG_FILE_COUNT) {
                 logFiles.sortBy {
                     it.lastModified()

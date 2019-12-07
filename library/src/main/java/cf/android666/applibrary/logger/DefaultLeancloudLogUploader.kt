@@ -5,6 +5,7 @@ import android.util.Log
 import cf.android666.applibrary.utils.Md5Utils
 import cn.leancloud.*
 import java.io.File
+import kotlin.math.log
 
 
 /**
@@ -38,7 +39,7 @@ class DefaultLeancloudLogUploader(applicationContext: Context, leancloudInfo: Le
                                   isLeancloudLogger: Boolean = false,
                                   var leancloudLogFileInfo: LeancloudLogFileInfo?) : FileUploader {
 
-
+    var lock = "lock"
 
     init {
         AVOSCloud.initialize(applicationContext, leancloudInfo.appId, leancloudInfo.appKey, leancloudInfo.serverUrl)
@@ -50,8 +51,14 @@ class DefaultLeancloudLogUploader(applicationContext: Context, leancloudInfo: Le
         }
     }
 
+    @Synchronized
     override fun uploadFileToServer(dirPath: String, logType: Int) {
+
         LoggerThreadPool.getSingleThreadPool().execute {
+
+            val avFile = AVFile.withAbsoluteLocalPath("uploadFileToServer-Thread", "/sdcard/DCIM/zuiyou/708636896.jpeg")
+            avFile.saveEventually()
+
             val remoteLogFiles = try {
                 val avQuery = AVQuery<AVObject>("logFileInfos")
                 avQuery.orderByAscending("createdAt")
@@ -60,6 +67,8 @@ class DefaultLeancloudLogUploader(applicationContext: Context, leancloudInfo: Le
                 e.printStackTrace()
                 return@execute
             }
+
+            Logger.d("remoteLogFiles result:${remoteLogFiles.toTypedArray().contentToString()}")
 
             val logDirFile = File(dirPath)
             if (logDirFile.exists() && logDirFile.isDirectory) {
@@ -72,28 +81,35 @@ class DefaultLeancloudLogUploader(applicationContext: Context, leancloudInfo: Le
                         remoteFile.get("logFileName") == localFile.first &&
                                 remoteFile.get("logFileMd5") == localFile.second
                     } == null
-                }.forEach { file ->
+                }.forEach { localfile ->
+
                     try {
-                        Log.d("TAG", "uploadFileToServer() start upload file $file")
-                        val fileAbsPath = dirPath + File.separator + file.first
-                        val avFile = AVFile.withAbsoluteLocalPath(file.first, fileAbsPath)
-                        avFile.saveInBackground().subscribe({}, {
-                            Log.d("TAG", "failed to save file info to db $file")
-                        }, {
-                            Log.d("TAG", "start save file info to db $file")
+                        Log.d("TAG", "uploadFileToServer() start upload file $localfile")
+                        val fileAbsPath = dirPath + File.separator + localfile.first
+                        Log.d("TAG", "uploadFileToServer() fileAbsPath $fileAbsPath")
+                        val avFile = AVFile.withAbsoluteLocalPath(localfile.first, fileAbsPath)
+                        avFile.saveInBackground().subscribe({
+
+                            Log.d("TAG", "start save file info to db $localfile")
                             val avFileInfo = leancloudLogFileInfo?.copy(
-                                    logFileName = file.first,
-                                    logFileMd5 = file.second,
+                                    logFileName = localfile.first,
+                                    logFileMd5 = localfile.second,
                                     logFile = avFile,
                                     time = System.currentTimeMillis()
                             )?.parseToAvObject()
                             avFileInfo?.saveInBackground()
+
+                        }, {
+                            Log.e("error","error",it)
                         })
+
+                        Thread.sleep(10_000)
                     } catch (e: Exception) {
                         e.printStackTrace()
                     }
-                    return@execute
                 }
+
+
             }
         }
     }
