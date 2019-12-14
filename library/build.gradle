@@ -103,7 +103,7 @@ ext {
     userOrg = 'jixiaoyong' //bintray username
     siteUrl = 'www.android666.cf'
     gitUrl = 'https://github.com/jixiaoyong/DiyWidget.git'
-    currentVersion = '0.0.4' //版本号
+    currentVersion = '0.0.5' //版本号
     groupId = 'com.github.jixiaoyong' //jcenter 上的路径
     artifactId = 'library' //项目名称
     desc = 'Android Diy Widget'
