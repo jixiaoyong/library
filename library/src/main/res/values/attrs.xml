@@ -38,4 +38,27 @@
         </attr>
     </declare-styleable>
 
+    <declare-styleable name="XfermodeView">
+        <attr name="xfermode_model" format="integer">
+            <enum name="CLEAR" value="0" />
+            <enum name="SRC" value="1" />
+            <enum name="DST" value="2" />
+            <enum name="SRC_OVER" value="3" />
+            <enum name="DST_OVER" value="4" />
+            <enum name="SRC_IN" value="5" />
+            <enum name="DST_IN" value="6" />
+            <enum name="SRC_OUT" value="7" />
+            <enum name="DST_OUT" value="8" />
+            <enum name="SRC_ATOP" value="9" />
+            <enum name="DST_ATOP" value="10" />
+            <enum name="XOR" value="11" />
+            <enum name="DARKEN" value="16" />
+            <enum name="LIGHTEN" value="17" />
+            <enum name="MULTIPLY" value="13" />
+            <enum name="SCREEN" value="14" />
+            <enum name="ADD" value="12" />
+            <enum name="OVERLAY" value="15" />
+        </attr>
+    </declare-styleable>
+
 </resources>
