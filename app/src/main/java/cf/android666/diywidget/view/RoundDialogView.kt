@@ -19,8 +19,8 @@ import cf.android666.applibrary.view.BasicRoundDialog
 class RoundDialogView(context: Context) : BasicRoundDialog(context, null, "Choose something") {
     override fun getContentView(): View {
         val view = RecyclerView(context)
-        view.layoutManager = LinearLayoutManager(context, androidx.recyclerview.widget.LinearLayoutManager.VERTICAL, false)
-        view.adapter = object : androidx.recyclerview.widget.RecyclerView.Adapter<VH>() {
+        view.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        view.adapter = object : RecyclerView.Adapter<VH>() {
             override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH = VH(layoutInflater.inflate(android.R.layout.simple_dropdown_item_1line, parent, false))
 
             override fun getItemCount() = 300
@@ -34,6 +34,6 @@ class RoundDialogView(context: Context) : BasicRoundDialog(context, null, "Choos
         return view
     }
 
-    class VH(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView)
+    class VH(itemView: View) : RecyclerView.ViewHolder(itemView)
 
 }

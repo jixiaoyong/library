@@ -2,8 +2,7 @@ package cf.android666.applibrary.utils
 
 import android.graphics.Bitmap
 import android.util.LruCache
-import com.qihancloud.log.utils.LogUtils
-import com.qihancloud.products.util.io.FileUtils
+import cf.android666.applibrary.logger.Logger
 import java.io.File
 import java.io.FileOutputStream
 
@@ -25,7 +24,7 @@ object ImageLoader {
                 return value.byteCount
             }
         }
-        LogUtils.d("max memory:${maxMemory / 1024}kb")
+        Logger.d("max memory:${maxMemory / 1024}kb")
     }
 
     @JvmStatic
@@ -47,14 +46,27 @@ object ImageLoader {
     fun cleanAllCache() {
         try {
             bitmapCaches.evictAll()
-            FileUtils.cleanDirectory(File(CACHE_PATH))
+            cleanDirectory(File(CACHE_PATH))
         } catch (e: Exception) {
             e.printStackTrace()
         }
     }
 
+    private fun cleanDirectory(file: File) {
+        if (!file.exists()) {
+            return
+        }
+        if (file.isFile) {
+            file.delete()
+        } else if (file.isDirectory) {
+            file.listFiles().forEach {
+                cleanDirectory(it)
+            }
+        }
+    }
+
     fun getBitmapCache(filePath: String): Bitmap? {
-        val imageNameMd5 = Md5Utils.getMd5(filePath)
+        val imageNameMd5 = Md5Utils.getFileMd5HexString(File(filePath))
         //1. load screenshot from cache
         var bitmap = bitmapCaches.get(imageNameMd5)
 
@@ -74,9 +86,9 @@ object ImageLoader {
      * 并缓存到内存
      */
     private fun getFromFileCached(imageNameMd5: String): Bitmap? {
-        LogUtils.d("load form file cache:$imageNameMd5")
+        Logger.d("load form file cache:$imageNameMd5")
         val imagePath = CACHE_PATH + imageNameMd5
-        val bitmap = ThumbnailUtils.getImageThumbnail(imagePath)
+        val bitmap = ThumbnailUtils.getThumbnailBitmap(imagePath)
         bitmap?.let {
             bitmapCaches.put(imageNameMd5, bitmap)
         }
@@ -88,7 +100,7 @@ object ImageLoader {
      * 并缓存到内存和文件中
      */
     private fun createFromFileCached(filePath: String, imageNameMd5: String): Bitmap? {
-        LogUtils.d("create form file:$imageNameMd5 file:$filePath")
+        Logger.d("create form file:$imageNameMd5 file:$filePath")
         val bitmap = ThumbnailUtils.getThumbnailBitmap(filePath)
         bitmap?.let {
             saveBitmapToFileCache(bitmap, imageNameMd5)

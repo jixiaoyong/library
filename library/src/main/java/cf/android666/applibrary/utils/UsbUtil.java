@@ -16,12 +16,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import cf.android666.applibrary.logger.Logger;
+
 /**
  *
  */
 public class UsbUtil {
 
     private static final String TAG = "tag";
+    private static final String USB_PATH_6 = "";
 
 
     /**
@@ -59,7 +62,7 @@ public class UsbUtil {
             for (int i = 0; i < paths.size(); i++) {
                 String state = (String) getVolumeStateMethod.invoke(storageManager, paths.get(i).toString());
                 if (Environment.MEDIA_MOUNTED.equals(state)) {
-                    com.qihancloud.log.utils.LogUtils.i("**********file exists " + paths.get(i));
+                    Logger.i("**********file exists " + paths.get(i));
                     target.add((String) paths.get(i));
                 }
             }
@@ -136,7 +139,7 @@ public class UsbUtil {
     public static String getUsb6Path(Context ctx) {
         String mount = "";
         long maxFreeSize = 0;
-        File usbMountDir = new File(Constants.USB_PATH_6);
+        File usbMountDir = new File(USB_PATH_6);
         if (usbMountDir.listFiles() == null || usbMountDir.listFiles().length <= 0) {
             return mount;
         }

@@ -61,4 +61,12 @@
         </attr>
     </declare-styleable>
 
+    <declare-styleable name="LetterItemDecoration">
+        <attr name="color_letter_text" format="color" />
+        <attr name="color_letter_background" format="color" />
+        <attr name="color_background" format="color" />
+        <attr name="color_top_background" format="color" />
+        <attr name="size_title_text" format="dimension" />
+        <attr name="title_height" format="dimension" />
+    </declare-styleable>
 </resources>

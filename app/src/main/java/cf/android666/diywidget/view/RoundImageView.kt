@@ -51,7 +51,8 @@ class RoundImageView : ImageView {
         val rectF = RectF(0F, 0F, width.toFloat(), height.toFloat())
         val path = Path()
         when (imageType) {
-            ImageType.Circle -> path.addCircle((width / 2).toFloat(), (height / 2).toFloat(), (min(width, height) / 2).toFloat(), Path.Direction.CCW)
+            ImageType.Circle -> path.addCircle((width / 2).toFloat(),
+                    (height / 2).toFloat(), (min(width, height) / 2).toFloat(), Path.Direction.CCW)
             ImageType.RoundRect -> path.addRoundRect(rectF, rx, ry, Path.Direction.CCW)
         }
         canvas.clipPath(path)
