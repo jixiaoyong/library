@@ -2,12 +2,15 @@ package cf.android666.applibrary.view
 
 import android.content.Context
 import android.graphics.drawable.Drawable
+import android.os.Build
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import cf.android666.applibrary.R
-import kotlinx.android.synthetic.main.layout_toast.view.*
 import java.lang.ref.WeakReference
 
 /**
@@ -33,40 +36,44 @@ object Toast {
         toast.setGravity(Gravity.CENTER, 0, 0)
     }
 
+    @RequiresApi(Build.VERSION_CODES.KITKAT)
     @JvmStatic
     @JvmOverloads
     fun show(text: String, toastType: ToastType, gravity: Int? = Gravity.CENTER) {
         val drawableId = when (toastType) {
-            cf.android666.applibrary.view.Toast.ToastType.TIPS -> android.R.drawable.ic_dialog_info
-            cf.android666.applibrary.view.Toast.ToastType.WARNING -> android.R.drawable.stat_sys_warning
-            cf.android666.applibrary.view.Toast.ToastType.ERROR -> android.R.drawable.ic_delete
+            ToastType.TIPS -> android.R.drawable.ic_dialog_info
+            ToastType.WARNING -> android.R.drawable.stat_sys_warning
+            ToastType.ERROR -> android.R.drawable.ic_delete
         }
         val icon = weakReferenceContext.get()?.resources?.getDrawable(drawableId)
         show(text, Toast.LENGTH_SHORT, icon, gravity)
     }
 
+    @RequiresApi(Build.VERSION_CODES.KITKAT)
     @JvmStatic
     @JvmOverloads
     fun show(text: String, icon: Drawable? = null, gravity: Int? = Gravity.CENTER) {
         show(text, Toast.LENGTH_SHORT, icon, gravity)
     }
 
+    @RequiresApi(Build.VERSION_CODES.KITKAT)
     @JvmStatic
     @JvmOverloads
     fun show(text: String, duration: Int, icon: Drawable? = null, gravity: Int? = Gravity.CENTER) {
         gravity?.let { toast.setGravity(it, 0, 0) }
         val isIconShow = if (icon == null) View.GONE else View.VISIBLE
 
-        if (toast.view.isAttachedToWindow) {
-            toast.view.text.text = text
-            toast.view.icon.setImageDrawable(icon)
-            toast.view.icon.visibility = isIconShow
+        val toastView = toast.view
+        if (toastView?.isAttachedToWindow == true) {
+            toastView.findViewById<TextView>(R.id.text).text = text
+            toastView.findViewById<ImageView>(R.id.icon).setImageDrawable(icon)
+            toastView.findViewById<ImageView>(R.id.icon).visibility = isIconShow
         } else {
             val view = LayoutInflater.from(weakReferenceContext.get())
-                    .inflate(R.layout.layout_toast, null, false)
-            view.text.text = text
-            view.icon.setImageDrawable(icon)
-            view.icon.visibility = isIconShow
+                .inflate(R.layout.layout_toast, null, false)
+            view.findViewById<TextView>(R.id.text).text = text
+            view.findViewById<ImageView>(R.id.icon).setImageDrawable(icon)
+            view.findViewById<ImageView>(R.id.icon).visibility = isIconShow
             toast.duration = duration
             toast.view = view
             toast.show()

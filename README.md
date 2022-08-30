@@ -1,7 +1,8 @@
-# DiyWidget [![Download](https://api.bintray.com/packages/jixiaoyong/maven/library/images/download.svg)](https://bintray.com/jixiaoyong/maven/library/_latestVersion)
+# DiyWidget [![](https://jitpack.io/v/jixiaoyong/library.svg)](https://jitpack.io/#jixiaoyong/library)
+
+> 提示：此仓库API接口不稳定，代码比较陈旧，不推荐使用
+
 一些Android开发中常用的自定义控件和工具类
-
-
 
 # 使用方法
 
@@ -12,9 +13,7 @@
        
        repositories {
            ...
-           //以下两个maven库选一个即可
-           jcenter() //此处为稳定版本，默认就有
-           maven { url 'https://dl.bintray.com/jixiaoyong/maven/' }//此处可以获取到最新开发版本
+           maven { url 'https://jitpack.io' }
        }
    ```
 

@@ -3,12 +3,16 @@ package cf.android666.diywidget.scalelist
 import android.app.Activity
 import android.os.Bundle
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.annotation.IntDef
 import androidx.recyclerview.widget.LinearLayoutManager
 import cf.android666.applibrary.utils.ImmersiveUtils
 import cf.android666.diywidget.R
 import cf.android666.diywidget.view.RoundDialogView
 import kotlinx.android.synthetic.main.activity_scale.*
+import java.lang.annotation.Retention
+import java.lang.annotation.RetentionPolicy
 
 /**
  * author: jixiaoyong
@@ -25,7 +29,7 @@ class ScaleHorizontalActivity3 : Activity() {
 
     private val mItemCount: Int = 300
 
-    private var orientation = androidx.recyclerview.widget.LinearLayoutManager.VERTICAL
+    private var orientation = LinearLayoutManager.VERTICAL
     private val hasDecorationMap: MutableMap<Int, String> = mutableMapOf()
     private val datas: ArrayList<String> = arrayListOf()
 
@@ -38,17 +42,22 @@ class ScaleHorizontalActivity3 : Activity() {
         initData()
 
         recycler.layoutManager = LinearLayoutManager(this, orientation, false)
-        recycler.adapter = object : androidx.recyclerview.widget.RecyclerView.Adapter<RoundDialogView.VH>() {
-            override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RoundDialogView.VH = RoundDialogView.VH(
-                    layoutInflater.inflate(R.layout.item_scale_view, parent, false))
+        recycler.adapter =
+            object : androidx.recyclerview.widget.RecyclerView.Adapter<RoundDialogView.VH>() {
+                override fun onCreateViewHolder(
+                    parent: ViewGroup,
+                    viewType: Int
+                ): RoundDialogView.VH = RoundDialogView.VH(
+                    layoutInflater.inflate(R.layout.item_scale_view, parent, false)
+                )
 
-            override fun getItemCount() = mItemCount
+                override fun getItemCount() = mItemCount
 
-            override fun onBindViewHolder(holder: RoundDialogView.VH, position: Int) {
-                holder.itemView.findViewById<TextView>(R.id.textview)?.text = "Hello $position"
+                override fun onBindViewHolder(holder: RoundDialogView.VH, position: Int) {
+                    holder.itemView.findViewById<TextView>(R.id.textview)?.text = "Hello $position"
+                }
+
             }
-
-        }
 //        LinearSnapHelper().attachToRecyclerView(recycler)
         recycler.addItemDecoration(object : DiyDividerItemDecoration(this) {
             override fun shouldHaveDecoration(position: Int): Boolean {
@@ -61,11 +70,16 @@ class ScaleHorizontalActivity3 : Activity() {
             override fun getTitle(position: Int) = datas[position]
 
         })
-        recycler.setOnScrollListener(object : androidx.recyclerview.widget.RecyclerView.OnScrollListener() {
+        recycler.setOnScrollListener(object :
+            androidx.recyclerview.widget.RecyclerView.OnScrollListener() {
 
-            override fun onScrolled(recyclerView: androidx.recyclerview.widget.RecyclerView, dx: Int, dy: Int) {
+            override fun onScrolled(
+                recyclerView: androidx.recyclerview.widget.RecyclerView,
+                dx: Int,
+                dy: Int
+            ) {
                 super.onScrolled(recyclerView, dx, dy)
-                val layoutManager = recycler.layoutManager as androidx.recyclerview.widget.LinearLayoutManager
+                val layoutManager = recycler.layoutManager as LinearLayoutManager
                 val first = layoutManager.findFirstVisibleItemPosition()
                 selectCategorys = datas[first]
                 listMenu.adapter?.notifyDataSetChanged()
@@ -81,29 +95,34 @@ class ScaleHorizontalActivity3 : Activity() {
 
 
         listMenu.layoutManager = LinearLayoutManager(this, orientation, false)
-        listMenu.adapter = object : androidx.recyclerview.widget.RecyclerView.Adapter<RoundDialogView.VH>() {
-            override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RoundDialogView.VH = RoundDialogView.VH(
-                    layoutInflater.inflate(android.R.layout.simple_list_item_1, parent, false))
+        listMenu.adapter =
+            object : androidx.recyclerview.widget.RecyclerView.Adapter<RoundDialogView.VH>() {
+                override fun onCreateViewHolder(
+                    parent: ViewGroup,
+                    viewType: Int
+                ): RoundDialogView.VH = RoundDialogView.VH(
+                    layoutInflater.inflate(android.R.layout.simple_list_item_1, parent, false)
+                )
 
-            override fun getItemCount() = hasDecorationMap.size
+                override fun getItemCount() = hasDecorationMap.size
 
-            override fun onBindViewHolder(holder: RoundDialogView.VH, position: Int) {
-                holder.itemView.findViewById<TextView>(android.R.id.text1)?.text =
+                override fun onBindViewHolder(holder: RoundDialogView.VH, position: Int) {
+                    holder.itemView.findViewById<TextView>(android.R.id.text1)?.text =
                         hasDecorationMap[hasDecorationMap.keys.toIntArray()[position]]
-                holder.itemView.setOnClickListener {
-                    val key = hasDecorationMap.keys.toIntArray()[position]
-                    smoothScrollToTop(recycler, key)
+                    holder.itemView.setOnClickListener {
+                        val key = hasDecorationMap.keys.toIntArray()[position]
+                        smoothScrollToTop(recycler, key)
+                    }
                 }
-            }
 
-        }
+            }
 
 
     }
 
     private fun smoothScrollToTop(recycler: androidx.recyclerview.widget.RecyclerView, index: Int) {
         shouldScrollIndex = index
-        val layoutManager = recycler.layoutManager as androidx.recyclerview.widget.LinearLayoutManager
+        val layoutManager = recycler.layoutManager as LinearLayoutManager
         val first = layoutManager.findFirstVisibleItemPosition()
         val last = layoutManager.findLastVisibleItemPosition()
 

@@ -8,7 +8,6 @@ import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import cf.android666.applibrary.R
-import kotlinx.android.synthetic.main.view_banner_image_fragment.view.*
 
 /**
  * author: jixiaoyong
@@ -44,7 +43,7 @@ object BannerViewHelper {
 
         override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
             val view = inflater.inflate(R.layout.view_banner_image_fragment, null, false)
-            loadImageViewResource?.invoke(view.image, index)
+            loadImageViewResource?.invoke(view.findViewById(R.id.image), index)
             return view
         }
 

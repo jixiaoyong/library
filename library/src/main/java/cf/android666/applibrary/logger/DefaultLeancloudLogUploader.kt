@@ -42,7 +42,11 @@ class DefaultLeancloudLogUploader(applicationContext: Context, leancloudInfo: Le
     var lock = "lock"
 
     init {
-        AVOSCloud.initialize(applicationContext, leancloudInfo.appId, leancloudInfo.appKey, leancloudInfo.serverUrl)
+        try {
+            AVOSCloud.initialize(applicationContext, leancloudInfo.appId, leancloudInfo.appKey, leancloudInfo.serverUrl)
+        }catch (e: IllegalStateException) {
+            e.printStackTrace()
+        }
         if (isLeancloudLogger) {
             AVOSCloud.setLogLevel(AVLogger.Level.DEBUG)
         }

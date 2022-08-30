@@ -26,7 +26,6 @@ class ColorfulSineView : SineView {
     constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0)
             : super(context, attrs, defStyleAttr)
 
-    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0, defStyleRes: Int = 0)
             : super(context, attrs, defStyleAttr, defStyleRes)
 

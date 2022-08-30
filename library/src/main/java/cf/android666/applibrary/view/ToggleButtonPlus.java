@@ -40,21 +40,15 @@ public class ToggleButtonPlus extends ToggleButton {
 
         TypedArray array = context.obtainStyledAttributes(attrs,
                 R.styleable.ToggleButtonPlus, defStyleAttr, defStyleRes);
-
-        mBackgroundColor = array.getColor(R.styleable.ToggleButtonPlus_background_color, 0xff09bb07);
-        mForwardColor = array.getColor(R.styleable.ToggleButtonPlus_forward_color, 0xfff5f5f5);
-        mStrokeColor = array.getColor(R.styleable.ToggleButtonPlus_stroke_color, 0xddaaaaab);
-
+        commonInitial(array);
     }
 
     public ToggleButtonPlus(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+
         TypedArray array = context.obtainStyledAttributes(attrs,
                 R.styleable.ToggleButtonPlus, defStyleAttr, 0);
-
-        mBackgroundColor = array.getColor(R.styleable.ToggleButtonPlus_background_color, 0xff09bb07);
-        mForwardColor = array.getColor(R.styleable.ToggleButtonPlus_forward_color, 0xfff5f5f5);
-        mStrokeColor = array.getColor(R.styleable.ToggleButtonPlus_stroke_color, 0xddaaaaab);
+        commonInitial(array);
     }
 
     public ToggleButtonPlus(Context context, AttributeSet attrs) {
@@ -65,6 +59,13 @@ public class ToggleButtonPlus extends ToggleButton {
         this(context, null, 0);
     }
 
+    private void commonInitial(TypedArray array) {
+        mBackgroundColor = array.getColor(R.styleable.ToggleButtonPlus_background_color, 0xff09bb07);
+        mForwardColor = array.getColor(R.styleable.ToggleButtonPlus_forward_color, 0xfff5f5f5);
+        mStrokeColor = array.getColor(R.styleable.ToggleButtonPlus_stroke_color, 0xddaaaaab);
+
+
+    }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
@@ -171,11 +172,8 @@ public class ToggleButtonPlus extends ToggleButton {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-
-        switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                refresh();
-                break;
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            refresh();
         }
 
         return super.onTouchEvent(event);

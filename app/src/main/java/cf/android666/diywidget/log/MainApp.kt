@@ -26,17 +26,18 @@ class MainApp : Application() {
 //        LogCollector.initDebug(this)
         LogCollector.initDebug(this, BuildConfig.DEBUG)
         LogUtils.d("init method()")
-        LogUtils.wtf("wwwttf")
 
-        cf.android666.applibrary.logger.LogCollector.init(this, isSaveToFile = true,
-                logUploader = DefaultLeancloudLogUploader(this,
-                        DefaultLeancloudLogUploader.LeancloudInfo(leancloudAppId, leancloudAppKey, leancloudServerURL),
-                        leancloudLogFileInfo = DefaultLeancloudLogUploader.LeancloudLogFileInfo(
-                                "", "", null, getString(R.string.app_name),
-                                BuildConfig.APPLICATION_ID,
-                                BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE, BuildConfig.FLAVOR
-                        )
-                ))
+      try {
+//          cf.android666.applibrary.logger.LogCollector.init(this, isSaveToFile = true,
+//              logUploader = DefaultLeancloudLogUploader(this,
+//                  DefaultLeancloudLogUploader.LeancloudInfo(leancloudAppId, leancloudAppKey, leancloudServerURL),
+//                  leancloudLogFileInfo = DefaultLeancloudLogUploader.LeancloudLogFileInfo(
+//                      "", "", null, getString(R.string.app_name),
+//                      BuildConfig.APPLICATION_ID,
+//                      BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE,BuildConfig.BUILD_TYPE
+//                  )
+//              ))
+      }catch (e: Exception) {}
 
     }
 }

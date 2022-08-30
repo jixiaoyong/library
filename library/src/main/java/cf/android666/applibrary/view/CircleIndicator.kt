@@ -46,7 +46,7 @@ class CircleIndicator : View {
 
     private val handler = @SuppressLint("HandlerLeak")
     object : Handler() {
-        override fun handleMessage(msg: Message?) {
+        override fun handleMessage(msg: Message) {
             when (msg?.what) {
                 TRY_ANIM -> checkAnim()
             }

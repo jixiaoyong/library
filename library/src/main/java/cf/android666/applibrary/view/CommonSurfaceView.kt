@@ -38,16 +38,16 @@ abstract class CommonSurfaceView : SurfaceView, SurfaceHolder.Callback, Runnable
         keepScreenOn = true
     }
 
-    override fun surfaceChanged(holder: SurfaceHolder?, format: Int, width: Int, height: Int) {
+    override fun surfaceChanged(holder: SurfaceHolder, format: Int, width: Int, height: Int) {
         mIsDrawing = true
         thread { run() }
     }
 
-    override fun surfaceDestroyed(holder: SurfaceHolder?) {
+    override fun surfaceDestroyed(holder: SurfaceHolder) {
 
     }
 
-    override fun surfaceCreated(holder: SurfaceHolder?) {
+    override fun surfaceCreated(holder: SurfaceHolder) {
         mIsDrawing = false
     }
 

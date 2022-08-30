@@ -28,8 +28,8 @@ abstract class BasicDialog @JvmOverloads constructor(context: Context, themeResI
         val rrs = RoundRectShape(floatArrayOf(radius, radius, radius, radius, radius, radius, radius, radius), null, null)
         val backgroundDrawable = ShapeDrawable(rrs)
         backgroundDrawable.paint.color = Color.WHITE
-        window.setBackgroundDrawable(backgroundDrawable)
+        window?.setBackgroundDrawable(backgroundDrawable)
     }
 
-    abstract fun getContextView(): View?
+    abstract fun getContextView(): View
 }

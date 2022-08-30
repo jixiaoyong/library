@@ -21,7 +21,7 @@ class ScaleHorizontalActivity2 : Activity() {
 
     private val mItemCount: Int = 100
 
-    private var orientation = androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL
+    private var orientation = LinearLayoutManager.HORIZONTAL
     private val hasDecorationMap: MutableMap<Int, String> = mutableMapOf()
     private val datas: ArrayList<String> = arrayListOf()
 

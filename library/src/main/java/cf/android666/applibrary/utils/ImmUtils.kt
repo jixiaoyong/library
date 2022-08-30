@@ -26,11 +26,9 @@ object ImmUtils {
     fun hideImm(activity: Activity) {
         try {
             val imm = activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            if (imm != null) {
-                val result1 = imm.hideSoftInputFromWindow(activity.window.decorView.windowToken, WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN)
-                if (!result1) {
-                    hideKeyboard(activity)
-                }
+            val result1 = imm.hideSoftInputFromWindow(activity.window.decorView.windowToken, WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN)
+            if (!result1) {
+                hideKeyboard(activity)
             }
         } catch (e: Exception) {
             hideKeyboard(activity)
@@ -40,7 +38,7 @@ object ImmUtils {
     fun hideImm(activity: Activity, dialog: Dialog) {
         try {
             val manager = activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            val result = manager.hideSoftInputFromWindow(dialog.currentFocus.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
+            val result = manager.hideSoftInputFromWindow(dialog.currentFocus?.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
         } catch (e: Exception) {
             hideKeyboard(activity)
         }
